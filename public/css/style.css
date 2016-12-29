@@ -1,0 +1,205 @@
+
+/* Tabs */
+.tabs-panel {
+  height: 54px;
+  margin: 50px 0 0 0;
+  padding-left: 0;
+  text-align: center;
+  border-bottom: 1px solid #e7e7e7;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; 
+}
+.tabs-panel::-webkit-scrollbar {
+  height: 0; /* for horizontal scrollbars */
+}
+.tabs-panel > li {
+  display: inline-block;
+  list-style: none;
+}
+.tabs-panel > li > a {
+  display: block;
+  padding: 18px 15px 15px 15px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.tabs-panel > li > a:hover {
+  text-decoration: none;
+}
+.tabs-panel > li.active > a {
+  padding-bottom: 11px;
+  border-bottom: 4px solid #999;
+}
+
+/* Navbar */
+main.container {
+  margin-top: 30px;
+}
+.navbar-btn {
+  padding-right: 15px;
+}
+
+/* Sports */
+.sports > .row {
+  margin-bottom: 30px;
+}
+.navbar {
+  border-radius: 0px;
+}
+.sports .sport-item > a {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+}
+
+.sports .sport-item img {
+  border-radius: 4px;
+}
+
+.sports .sport-item-title {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 10px 5px;
+  width: 100%;
+  height: 40px;
+  color: #fff;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,000000+30,000000+100&0+0,1+100 */
+  background: -moz-linear-gradient(top, rgba(238,238,238,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(238,238,238,0) 0%,rgba(0,0,0,0.3) 30%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(238,238,238,0) 0%,rgba(0,0,0,0.3) 30%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00eeeeee', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+@media (max-width: 991px) {
+  .sports > .row {
+    margin-bottom: 0;
+  }
+  .sports .sport-item {
+    margin-bottom: 30px;
+  }
+  .navbar-offcanvas {
+    padding-top: 60px;
+  }
+  .navbar-offcanvas-form {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-xs-btn {
+    margin-right: 15px;
+    float: right !important;
+  }
+}
+
+/* Areas */
+.areas > .media {
+  overflow: hidden;
+  z-index: 1;
+  background: #fff;
+  border-radius: 2px;
+  box-sizing: border-box;
+  /*-webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);*/
+  /*box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);*/
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+.areas > .media > .media-body {
+  padding: 20px;
+}
+
+/* Matches */
+.match-link {
+  display: block;
+}
+.match-link:hover {
+  text-decoration: none;
+}
+
+
+/* Table Calendar */
+
+.table-calendar {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.table-calendar > thead > tr > th,
+.table-calendar > tbody > tr > th,
+.table-calendar > tfoot > tr > th,
+.table-calendar > thead > tr > td,
+.table-calendar > tbody > tr > td,
+.table-calendar > tfoot > tr > td {
+  padding: 8px;
+  text-align: center;
+  line-height: 1.42857143;
+  vertical-align: top;
+}
+.table-calendar > thead > tr > td,
+.table-calendar > tbody > tr > td.time-matches,
+.table-calendar > tbody > tr > td.status-matches,
+.table-calendar > tfoot > tr > td {
+  padding: 0;
+  /*text-align: right;*/
+}
+td.time-matches > div {
+  padding: 12px 0 10px;
+  border-bottom: 1px solid #ddd;
+}
+td.status-matches > div {
+  padding: 12px 0 10px;
+  border-bottom: 1px solid #ddd;
+}
+td.time-matches > div > div,
+td.status-matches > div > div,
+td.status-matches > div > label {
+  height: 24px;
+}
+td.status-matches > div > label {
+  color: #3c763d;
+}
+.table-calendar > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+.table-bordered > thead > tr > th.empty-th {
+  border: 0;
+}
+.table > tbody > tr > td.hours {
+  position: relative;
+  border: 0;
+  padding: 0;
+}
+.table > tbody > tr > td.hours > span {
+  position: absolute;
+  right: 8px;
+  margin-top: -9px;
+}
+.table > tbody > tr > td.vertical-align {
+  vertical-align: middle;
+}
+
+/* Chat */
+.scroll-chat {
+  /*background-color: #fff;*/
+  height: 400px;
+  overflow-y: auto;
+  bottom: 0;
+}
+
+/* Footer */
+.footer {
+  padding: 50px 0;
+  background-color: #f8f8f8;
+}

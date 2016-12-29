@@ -1,0 +1,20 @@
+{
+    "name": "abuLoot/epay",
+    "description": "Epay payment",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Issayev Adilet",
+            "email": "issayev.adilet@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AbuLoot\\Epay\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "~5"
+    }
+}
