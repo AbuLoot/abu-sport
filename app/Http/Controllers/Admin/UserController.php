@@ -42,12 +42,12 @@ class UserController extends Controller
 
 	public function update(Request $request, $id)
 	{
-        $this->validate($request, [
-            'name' => 'required|max:60',
-            'surname' => 'required|max:60',
-        	'phone' => 'required',
-        	'email' => 'required',
-        ]);
+		$this->validate($request, [
+			'name' => 'required|max:60',
+			'surname' => 'required|max:60',
+			'phone' => 'required',
+			'email' => 'required',
+		]);
 
 		$user = User::findOrFail($id);
 
@@ -118,25 +118,25 @@ class UserController extends Controller
 		return $users->get();
 	}
 
-    public function resizeImage($image, $width, $height, $path, $quality, $color = '#ffffff')
-    {
-        // $frame = Image::canvas($width, $height, $color);
-        $newImage = Image::make($image);
+	public function resizeImage($image, $width, $height, $path, $quality, $color = '#ffffff')
+	{
+		// $frame = Image::canvas($width, $height, $color);
+		$newImage = Image::make($image);
 
-        if ($newImage->width() <= $newImage->height()) {
-            $newImage->resize(null, $height, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
-        else {
-            $newImage->resize($width, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
+		if ($newImage->width() <= $newImage->height()) {
+			$newImage->resize(null, $height, function ($constraint) {
+				$constraint->aspectRatio();
+			});
+		}
+		else {
+			$newImage->resize($width, null, function ($constraint) {
+				$constraint->aspectRatio();
+			});
+		}
 
-        // $frame->insert($newImage, 'center');
-        $newImage->save($path, $quality);
-    }
+		// $frame->insert($newImage, 'center');
+		$newImage->save($path, $quality);
+	}
 
 	public function cropImage($image, $width, $height, $path, $quality)
 	{

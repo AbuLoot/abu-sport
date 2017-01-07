@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
           <label for="org_id">Организации:</label>
-          <select class="form-control" name="org_id" id="city" required>
+          <select class="form-control" name="org_id" id="city">
             <option value=""></option>
             @foreach($organizations as $organization)
               @if (in_array($organization->id, $user->organization->lists('id')->toArray()))
