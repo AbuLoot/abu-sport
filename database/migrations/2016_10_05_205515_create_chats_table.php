@@ -13,6 +13,7 @@ class CreateChatsTable extends Migration
     public function up()
     {
         Schema::create('chats', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('match_id');
             $table->text('message');
