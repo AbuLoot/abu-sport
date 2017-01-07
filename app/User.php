@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function organization()
     {
-        return $this->belongsToMany('App\Organization', 'org_user', 'org_id', 'user_id');
+        return $this->belongsToMany('App\Organization', 'org_user', 'user_id', 'org_id');
     }
 
     public function match()

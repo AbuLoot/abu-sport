@@ -1,7 +1,7 @@
 
 var request = require('request'),
 	io = require('socket.io')(6001, {
-		origins: 'localhost:8000:*'
+		origins: 'abusport.kz:*'
 	}),
 	Redis = require('ioredis'),
 	redis = new Redis;
