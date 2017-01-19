@@ -127,5 +127,3 @@ Route::get('api/requestexitmatch/{matchid}/{userid}','ApiController@requestexitm
 Route::get('api/requestweekdays/{playgroundid}/{selecteddate}','ApiController@requestweekdays');
 Route::post('api/requestmatchcreate/','ApiController@requestmatchcreate');
 Route::post('api/requestsign64/','ApiController@requestsign64');
-
-// Test
