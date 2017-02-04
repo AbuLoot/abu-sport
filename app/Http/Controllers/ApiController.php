@@ -67,23 +67,23 @@ class ApiController extends Controller
     }
 	public function requestprofile(Request $request)
 	{
-	$response=array();						
+		$response=array();						
 						
-			if(isset($request->userid) && $request->userid!=''){
-			 $user= User::find($request->userid);
-						$user->name = $request->name;
-						$user->surname =$request->surname;
-						$user->email = $request->email;
-						$user->save();
-						$response['profile']=$user;
-						$response['error']=false;						 				
-			}else{
-			
-				$response['error']=true;	
-			}
-			
-			return Response::json($response);
-			
+		if(isset($request->userid) && $request->userid!=''){
+		 $user= User::find($request->userid);
+					$user->name = $request->name;
+					$user->surname =$request->surname;
+					$user->email = $request->email;
+					$user->save();
+					$response['profile']=$user;
+					$response['error']=false;
+		}else{
+		
+			$response['error']=true;	
+		}
+
+		return Response::json($response);
+		
    }
 	public function requestcallbacklist($userid)
 	{
