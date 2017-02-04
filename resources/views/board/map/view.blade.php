@@ -6,17 +6,10 @@
       </a>
     </div>
     <div class="media-body">
-      <div class="pull-left">
-        <h4 class="media-heading"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id) }}">{{ $area->title }}</a></h4>
-        <p><b>Адрес:</b> {{ $area->address }}</p>
-      </div>
-      <div class="pull-left">
-        <dl class="dl-horizontal">
-          Игроков: <span class="badge">59</span><br>
-          Матчей: <span class="badge">20</span>
-        </dl>
-      </div>
-      <div class="clearfix"></div>
+      <h4 class="media-heading"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id) }}">{{ $area->title }}</a></h4>
+      <p>Адрес: {{ $area->address }}</p>
+      <p>Игроков: <span class="badge">59</span></p>
+      <p>Матчей: <span class="badge">20</span></p>
       <p>{{ $area->description }}</p>
     </div>
   </div>
