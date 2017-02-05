@@ -157,6 +157,7 @@ td.status-matches > div > label {
   border: 0;
 }
 .table > tbody > tr > td.hours {
+  font-size: 13px;
   padding-top: 2px;
   padding-right: 4px;
   text-align: right;

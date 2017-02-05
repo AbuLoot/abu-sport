@@ -61,7 +61,7 @@
                 @foreach ($field->matches->where('date', $date)->where('status', 1) as $num => $match)
                   <tr>
                     @if ($match->start_time <= $hour AND $match->end_time >= $hour)
-                      <td>{{ $hour }}</td>
+                      <td class="hours">{{ $hour }}</td>
                       <td>
                         <span class="glyphicon glyphicon-time"></span> Матч {{ $match->id }}
                         <span class="pull-right label label-default">Конец игры</span>
@@ -75,7 +75,7 @@
 
                 @if ($game == false)
                   <tr>
-                    <td>{{ $hour }}</td>
+                    <td class="hours">{{ $hour }}</td>
                     <td><span>Время прошло</span></td>
                     <td></td>
                     <td></td>
