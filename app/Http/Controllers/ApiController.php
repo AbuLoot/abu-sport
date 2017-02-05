@@ -61,22 +61,31 @@ class ApiController extends Controller
 					
 		}catch (Exception $e){
             $response['error']=true;
-        }finally{
+        }
             return Response::json($response);
-        }	
+        
     }
 	public function requestprofile(Request $request)
 	{
-	$response=array();						
+			$response=array();						
 						
 			if(isset($request->userid) && $request->userid!=''){
 			 $user= User::find($request->userid);
 						$user->name = $request->name;
 						$user->surname =$request->surname;
 						$user->email = $request->email;
-						$user->save();
+					       // $user->image_avatar = $request->image_avatar;
+                                          	if($user->save()){
+						   $profile=Profile::find($request->userid);
+ 						   $profile->img_avatar=$request->img_avatar;
+							 if($profile->save()){
+
+						}						     	 
+						}
+						
+							
 						$response['profile']=$user;
-						$response['error']=false;						 				
+						$response['error']=false;
 			}else{
 			
 				$response['error']=true;	

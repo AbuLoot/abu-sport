@@ -7,13 +7,15 @@ var request = require('request'),
 	redis = new Redis;
 
 io.on('connection', function(socket) {
+ 
 	socket.on('subscribe', function(channel) {
 		console.log('Subscribe on:', channel);
-
 		socket.join(channel, function(error) {
 			socket.send('Join to ' + channel);
 		});
 	});
+        
+
 });
 
 redis.psubscribe('*', function(error, count) {
