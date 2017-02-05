@@ -32,7 +32,7 @@
 
     @foreach($area->fields as $field)
       <h4>{{ $area->title.' - '.$field->title }}</h4>
-      <ul class="nav nav-tabs nav-justified">
+      <ul class="nav nav-tabs">
         @foreach ($days as $day)
           @if ($day['year'] == $date)
             <li class="active"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches/'.$day['year']) }}">{{ $day['day'].' '.$day['short_weekday'] }}</a></li>

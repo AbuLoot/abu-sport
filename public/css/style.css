@@ -129,29 +129,13 @@ main.container {
 
 
 /* Table Calendar */
-
-.table-calendar {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 20px;
-}
-.table-calendar > thead > tr > th,
-.table-calendar > tbody > tr > th,
-.table-calendar > tfoot > tr > th,
-.table-calendar > thead > tr > td,
-.table-calendar > tbody > tr > td,
-.table-calendar > tfoot > tr > td {
-  padding: 8px;
-  text-align: center;
-  line-height: 1.42857143;
-  vertical-align: top;
-}
-.table-calendar > thead > tr > td,
-.table-calendar > tbody > tr > td.time-matches,
-.table-calendar > tbody > tr > td.status-matches,
-.table-calendar > tfoot > tr > td {
-  padding: 0;
-  /*text-align: right;*/
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  padding: 12px 8px;
 }
 td.time-matches > div {
   padding: 12px 0 10px;
@@ -169,22 +153,13 @@ td.status-matches > div > label {
 td.status-matches > div > label {
   color: #3c763d;
 }
-.table-calendar > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
-}
 .table-bordered > thead > tr > th.empty-th {
   border: 0;
 }
 .table > tbody > tr > td.hours {
-  position: relative;
-  border: 0;
-  padding: 0;
-}
-.table > tbody > tr > td.hours > span {
-  position: absolute;
-  right: 8px;
-  margin-top: -9px;
+  padding-top: 2px;
+  padding-right: 4px;
+  text-align: right;
 }
 .table > tbody > tr > td.vertical-align {
   vertical-align: middle;
