@@ -88,7 +88,7 @@
                     <?php $game = true; ?>
                     <?php $id = $field->id.'-'.$date.'_'.$hour_key; ?>
                     <tr id="{{ $id }}">
-                      <td>{{ $hour }}</td>
+                      <td class="hours">{{ $hour }}</td>
                       @if ($match->status == 1)
                         <td>
                           <span class="glyphicon glyphicon-time"></span>
@@ -119,7 +119,7 @@
                   @foreach($field->schedules->where('week', $index_weekday) as $schedule)
                     @if ($schedule->start_time <= $hour AND $schedule->end_time >= $hour)
                       <tr id="{{ $id }}" class="bg-info">
-                        <td>{{ $hour }}</td>
+                        <td class="hours">{{ $hour }}</td>
                         <td><span>Поле свободно</span></td>
                         <td>0</td>
                         <td>{{ $schedule->price }} тг</td>
