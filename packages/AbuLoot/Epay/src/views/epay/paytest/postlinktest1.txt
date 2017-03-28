@@ -1,0 +1,17 @@
+<document>
+  <bank name="Kazkommertsbank JSC">
+    <customer name="Ucaf Test Maest" mail="SeFrolov@kkb.kz" phone="">
+      <merchant cert_id="00C182B189" name="test merch">
+        <order order_id="0706172110" amount="1000" currency="398">
+          <department merchant_id="92056001" amount="1000"/>
+        </order>
+      </merchant>
+    <merchant_sign type="RSA"/>
+    </customer>
+    <customer_sign type="RSA"/>
+    <results timestamp="2006-07-06 17:21:50">
+      <payment merchant_id="92056001" amount="1000" reference="618704198173" approval_code="447753" response_code="00"/>
+    </results>
+  </bank>
+  <bank_sign cert_id="00C18327E8" type="SHA/RSA">PGRvY3VtZW50PjxtZXJjaGFudCBjZXJ0X2lkPSIwMEMxODJCMTg5IiBuYW1lPSJUZXN0IHNob3AiPjxvcmRlciBvcmRlcl9pZD0iMDAwMDA1IiBhbW91bnQ9IjEwMDAwIiBjdXJyZW5jeT0iMzk4Ij48ZGVwYXJ0bWVudCBtZXJjaGFudF9pZD0iOTIwNjExMDEiIGFtb3VudD0iMTAwMDAiLz48L29yZGVyPjwvbWVyY2hhbnQ+PG1lcmNoYW50X3NpZ24gdHlwZT0iUlNBIj5rMzZKdDV0RWtIbC9FZ3AyWGdZWHVhdFFZeExtTkFmK1o0OHpCckdtbXpwSXd0aG5VT29Mcjg4QWg0eWtzZU53Ym9LbG5EMVZGTHZxUnB0V2RJdnhRdz09PC9tZXJjaGFudF9zaWduPjwvZG9jdW1lbnQ+</bank_sign >
+</document>
