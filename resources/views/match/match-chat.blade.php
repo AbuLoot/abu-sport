@@ -101,8 +101,11 @@
       }
 
       block.scrollTop = block.scrollHeight;
+<<<<<<< HEAD
 	  
 	  socket.emit('mess', data);
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
     });
 
     function appendMessage(data, mediaClass) {

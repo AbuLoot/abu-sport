@@ -111,8 +111,12 @@ Route::group(['prefix' => 'panel', 'middleware' => ['auth', 'role:area-admin']],
 
 // Api
 Route::post('api/requestmessages/','ApiController@requestmessages');
+<<<<<<< HEAD
 Route::post('api/requestaddmessage/','ApiController@postMessageAjax');
 Route::post('api/message-ajax/{match_id}/{user_id}', 'ApiController@postMessageAjax');
+=======
+Route::post('api/requestaddmessage/','ApiController@requestaddmessage');
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 Route::post('api/requestprofile/','ApiController@requestprofile');
 Route::get('api/requestcallbacklist/{userid}','ApiController@requestcallbacklist');
 Route::post('api/requestnewcallback/','ApiController@requestnewcallback');
@@ -128,3 +132,7 @@ Route::get('api/requestexitmatch/{matchid}/{userid}','ApiController@requestexitm
 Route::get('api/requestweekdays/{playgroundid}/{selecteddate}','ApiController@requestweekdays');
 Route::post('api/requestmatchcreate/','ApiController@requestmatchcreate');
 Route::post('api/requestsign64/','ApiController@requestsign64');
+<<<<<<< HEAD
+=======
+Route::post('api/message-ajax/{match_id}/{user_id}', 'ApiController@postMessageAjax');
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca

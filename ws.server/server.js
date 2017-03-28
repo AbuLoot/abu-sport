@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var request = require('request'),
 	io = require('socket.io')(6001),
 	Redis = require('ioredis'),
@@ -40,3 +41,9 @@ redis.on('pmessage', function (subscribed, channel, message) {
 		.emit(channel, message.data);
 		
 });
+=======
+var io=require('socket.io')(6002);
+io.on('connection',function(socket){
+    console.log('New connection');
+});
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca

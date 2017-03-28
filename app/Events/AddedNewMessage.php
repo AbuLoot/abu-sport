@@ -39,9 +39,14 @@ class AddedNewMessage extends Event implements ShouldBroadcast
     {
         return [
             'user_id' => $this->message->user_id,
+<<<<<<< HEAD
             'fullname' =>$this->message->user->surname.' '.$this->message->user->name,
             'message' => $this->message->message,
 			'match_id' => $this->message->match_id,
+=======
+            'fullname' => Auth::user()->surname.' '.Auth::user()->name,
+            'message' => $this->message->message,
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
             'created_at' => $this->message->created_at
         ];
     }

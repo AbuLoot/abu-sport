@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Validator;
+<<<<<<< HEAD
 use Auth;
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 
 use App\Sport;
 use App\Area;
@@ -326,7 +329,11 @@ class MatchController extends Controller
         $request->user()->save();
 
         // User joined to match
+<<<<<<< HEAD
         event(new JoinedToMatch($match, Auth::id()));
+=======
+        event(new JoinedToMatch($match));
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 
         return redirect()->back()->with('status', 'Вы в игре!');
     }
@@ -365,7 +372,11 @@ class MatchController extends Controller
         $request->user()->save();
 
         // User joined to match
+<<<<<<< HEAD
         event(new JoinedToMatch($match, Auth::id()));
+=======
+        event(new JoinedToMatch($match));
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 
         $messages['success'] = 'Вы в игре!';
         $messages['csrf'] = csrf_token();
@@ -391,7 +402,11 @@ class MatchController extends Controller
         $request->user()->save();
 
         // User left from match
+<<<<<<< HEAD
         event(new LeftMatch($match, $request->user()->id));
+=======
+        event(new LeftMatch($match));
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 
         return redirect()->back()->with('info', 'Вы вышли из игры!');
     }
@@ -415,7 +430,11 @@ class MatchController extends Controller
         $request->user()->save();
 
         // User left from match
+<<<<<<< HEAD
         event(new LeftMatch($match, $request->user()->id));
+=======
+        event(new LeftMatch($match));
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 
         $messages['success'][0] = 'Вы вышли из игры!';
         return response()->json($messages);

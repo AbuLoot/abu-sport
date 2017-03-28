@@ -8,16 +8,25 @@ use DB;
 use Auth;
 use Storage;
 use App;
+<<<<<<< HEAD
 use App\SMS;
 use App\User;
 use App\Area;
 use App\Profile;
 use App\Sport;
+=======
+use App\User;
+use App\SMS;
+use App\Profile;
+use App\Sport;
+use App\Area;
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 use App\MatchUser;
 use App\Match;
 use App\Feedback;
 use App\Payment;
 use App\Chat;
+<<<<<<< HEAD
 use App\Events\LeftMatch;
 use App\Events\JoinedToMatch;
 use App\Events\AddedNewMessage;
@@ -33,6 +42,111 @@ class ApiController extends Controller
    	/* 
 	/* Request sms
 	*/
+=======
+use App\Http\Controllers\Controller;
+use AbuLoot\Sms\MobizonApi as Mobizon;
+use App\Events\AddedNewMessage;
+
+class ApiController extends Controller
+{
+	public function requestmessages(Request $request)
+    {
+	    $ps=array();
+		try {
+		    $chats = DB::table('chats')->where('match_id', '=', $request->matchid)->get();
+            foreach($chats as $chat){
+			    $ar['id']=$chat->id;
+				$ar['message']=$chat->message;
+				$ar['created_at']=$chat->created_at;
+				$user = User::find($chat->user_id);
+				$ar['username']=$user->name;
+				$ar['user_id']=$user->id;
+                array_push($ps,$ar);
+			}
+			$response['messages']=$ps;
+			$response['error']=false;
+		}catch (Exception $e){
+            $response['error']=true;
+        }finally{
+            return Response::json($response);
+        }
+    }
+    public function requestaddmessage(Request $request)
+    {
+		try{
+			$chat = new Chat;
+			$chat->match_id =$request->match_id;
+			$chat->user_id = $request->user_id;
+			$chat->message = $request->message;
+			$chat->save();
+			/*event(
+					new AddedNewMessage($chat)
+			);*/
+				$response['error']=false;
+
+		}catch (Exception $e){
+            $response['error']=true;
+        }finally{
+            return Response::json($response);
+        }
+    }
+	public function requestprofile(Request $request)
+	{
+		$response=array();
+
+		if(isset($request->userid) && $request->userid!=''){
+		 $user= User::find($request->userid);
+					$user->name = $request->name;
+					$user->surname =$request->surname;
+					$user->email = $request->email;
+					$user->save();
+					$response['profile']=$user;
+					$response['error']=false;
+		}else{
+
+			$response['error']=true;
+		}
+
+		return Response::json($response);
+
+   }
+	public function requestcallbacklist($userid)
+	{
+	   try {
+            $callbacks = DB::table('feedback')->orderBy('created_at', 'desc')->where('user_id', '=', $userid)->get();
+            $response['callbacks']= $callbacks;
+            $response['error']=false;
+        }catch (Exception $e){
+            $response['error']=true;
+        }finally{
+            return Response::json($response);
+        }
+	}
+	public function requestnewcallback(Request $request)
+	{
+	$response=array();
+
+			if(isset($request->userid) && $request->userid!=''){
+			    $response['error']=false;
+			    $feedback = new Feedback;
+				$feedback->user_id = $request->userid;
+				$feedback->email = $request->email;
+				$feedback->text = $request->text;
+						if($feedback->save()){
+							$response['error']=false;
+						}
+						else{
+						     $response['error']=true;
+						}
+			}else{
+
+				$response['error']=true;
+			}
+
+			return Response::json($response);
+
+   }
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 	public function requestsms($mobile,$name,$surname,$email,$password,$sex)
 	{
 
@@ -99,9 +213,12 @@ class ApiController extends Controller
           return Response::json($response);
 
 	}
+<<<<<<< HEAD
 	/* 
 	/* Verify sms
 	*/
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 	public function requestverifyotp($otp)
 	{
 	$response=array();
@@ -131,9 +248,12 @@ class ApiController extends Controller
 			return Response::json($response);
 
    }
+<<<<<<< HEAD
     /* 
 	/* Login
 	*/
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
     public function requestlogin($phone,$password)
 	{
 		  $response = array();
@@ -158,9 +278,12 @@ class ApiController extends Controller
           return Response::json($response);
 
    }
+<<<<<<< HEAD
     /* 
 	/* Get all sports
 	*/
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
     public function requestsports()
 	{
 	   try{
@@ -173,9 +296,12 @@ class ApiController extends Controller
             return Response::json($response);
         }
 	}
+<<<<<<< HEAD
     /* 
 	/* Get all areas
 	*/
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 	public function requestplaygrounds($sportid)
 	{
 	   try{
@@ -208,6 +334,7 @@ class ApiController extends Controller
             return Response::json($response);
         }
 	}
+<<<<<<< HEAD
 	/* 
 	/* Get all matches
 	*/
@@ -215,6 +342,11 @@ class ApiController extends Controller
 	{
 	   try {
 	   $response=array();
+=======
+	public function requestmatches($areaid)
+	{
+	   try {
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 	    $ms=array();
 	    $date= date("Y-m-d");
 		$hour=date("H:i");
@@ -234,7 +366,11 @@ class ApiController extends Controller
 			  $mt['game_type']=$match->game_type;
 			  $mt['game_format']=$match->game_format;
 			  $mt['start_time']=$match->start_time;
+<<<<<<< HEAD
 			  $endTime = strtotime("+0 minutes", strtotime($match->end_time));
+=======
+			  $endTime = strtotime("+60 minutes", strtotime($match->end_time));
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 			  $mt['end_time']=date("H:i",$endTime);
 			  $mt['number_of_players']=$match->number_of_players;
 			  $mplayers = DB::table('match_user')->select('match_user.user_id')->where('match_user.match_id', '=', $match->id)->get();
@@ -253,9 +389,12 @@ class ApiController extends Controller
             return Response::json($response);
         }
 	}
+<<<<<<< HEAD
 	/* 
 	/* Get all matchplayers
 	*/
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 	public function requestmatchplayers($matchid)
 	{
      $res=array();
@@ -280,6 +419,7 @@ class ApiController extends Controller
             return Response::json($response);
         }
 	}
+<<<<<<< HEAD
 	/*
 	/* Join to match
 	*/
@@ -342,6 +482,42 @@ class ApiController extends Controller
 	*/
 	public function requestweekdays($playgroundid,$selecteddate)
 	{
+=======
+	public function requestjoinmatch($matchid,$userid)
+	{
+	$user = User::find(intval($userid));
+	$match = Match::find(intval($matchid));
+	//$result=$match->users()->attach($userid);
+	$result=DB::table('match_user')->insert(['user_id' => $userid, 'match_id' => $matchid]);
+			if(!empty($result))
+	                  {
+							$response['error']=false;
+							$response['message']="Player joined success";
+						}
+						else{
+						     $response['error']=true;
+						     $response['message']="Player failed";
+				}
+
+				return Response::json($response);
+
+	}
+	public function requestexitmatch($matchid,$userid)
+	{
+		$deletedRows=DB::table('match_user')->where('user_id', '=', $userid)->where('match_id', '=', $matchid)->delete();
+				if($deletedRows>0){
+					$response['error']=false;
+					$response['message']="Player deleted success";
+				}
+				else{
+				    $response['error']=true;
+				    $response['message']="Player failed";
+				}
+				return Response::json($response);
+
+	}
+	public function requestweekdays($playgroundid,$selecteddate){
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 		//$schedules = DB::table('schedules')->select('schedules.field_id','schedules.start_time','schedules.end_time','schedules.price','schedules.status','schedules.date')->where('schedules.field_id', '=', 1)->where('schedules.week', '=', 1)->get();
 		try{
 		     $days=array();
@@ -448,6 +624,7 @@ class ApiController extends Controller
 			return Response::json($response);
 		}
 	}
+<<<<<<< HEAD
 	/* 
 	/* Create new match
 	*/
@@ -635,6 +812,38 @@ class ApiController extends Controller
     }  
   /* Send sms to phone number */
    	public function sendSms($phone,$code)
+=======
+
+	public function requestmatchcreate(Request $request)
+	{
+		        $match = new Match;
+				$match->sort_id = 1;
+				$match->user_id = intval($request->userid);
+				$match->field_id = intval($request->fieldid);
+				$match->start_time = $request->starttime;
+				$match->end_time = $request->endtime;
+				$match->date = $request->date;
+				$match->match_type = $request->matchtype;
+				$match->game_type = $request->gametype;
+				$match->number_of_players = intval($request->numberofplayers);
+				$match->game_format = $request->format;
+				$match->price = intval($request->price);
+				$match->description = $request->description;
+				$match->status =0;
+				if($match->save()){
+							$response['error']=false;
+							$response['message']="Match created success";
+						}
+						else{
+						     $response['error']=true;
+						     $response['message']="Create match failed";
+						}
+
+				return Response::json($response);
+
+	}
+	public function sendSms($phone,$code)
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
     {
         $apiKey = config('sms.key');
         $mobizonApi = new Mobizon($apiKey);
@@ -690,4 +899,63 @@ class ApiController extends Controller
 
         return $response;
     }
+<<<<<<< HEAD
+=======
+    public function requestsign64(Request $request){
+	 try {
+	  	if(intval($request->amount)>0){
+			/*$path=__DIR__.'/Payment/paysys/kkb.utils.php';
+			\File::requireOnce($path);
+			  $path1 = [
+				'MERCHANT_CERTIFICATE_ID' => '00C182B189',
+				'MERCHANT_NAME' => 'Test shop',
+				'PRIVATE_KEY_FN' => __DIR__.'/Payment/paysys/test_prv.pem',
+				'PRIVATE_KEY_PASS' => 'nissan',
+				'PUBLIC_KEY_FN' => __DIR__.'/Payment/paysys/kkbca.pem',
+				'MERCHANT_ID' => '92061101',
+				'XML_TEMPLATE_FN' => __DIR__.'/Payment/paysys/template.xml',
+				'XML_COMMAND_TEMPLATE_FN' => __DIR__.'/Payment/paysys/command_template.xml'
+			];*/
+			$user= User::find($request->userid);
+			/*$currency_id = "398"; // Шифр валюты  - 840-USD, 398-Tenge
+			$payment = new Payment;
+			$payment->user_id = $user->id;
+			$payment->amount = $request->amount;
+			$payment->status="0";
+			$payment->operation_id = 1;
+			$payment->save();
+			$content = process_request($payment->id,$currency_id, $payment->amount, $path1);*/
+			//$response['content']=$content;
+			$response['error']=false;
+			$response['content']="PGRvY3VtZW50PjxtZXJjaGFudCBjZXJ0X2lkPSIwMGMxODNkNzBiIiBuYW1lPSJOZXcgRGVtbyBTaG9wIj48b3JkZXIgb3JkZXJfaWQ9IjEwMTAwMDE3MDciIGFtb3VudD0iMTAiIGN1cnJlbmN5PSIzOTgiPjxkZXBhcnRtZW50IG1lcmNoYW50X2lkPSI5MjA2MTEwMyIgYW1vdW50PSIxMCIvPjwvb3JkZXI+PC9tZXJjaGFudD48bWVyY2hhbnRfc2lnbiB0eXBlPSJSU0EiPm5rWGQ4NkRBcGMrSVc5Qy9qQUZoaVVyS2VrUVZoaDQxQXBEbXVQWnBGQmF2WnZMaUhFdDh6SXNmK0xmR01WSE91NzlxdVEwcUlaUVllRWVjUGJhdWxiWEsxUmVJQ3VMdVNlU1NXdEUyQlBDWTZvUjEybVIzNlJJZUVOMnNUQm1mRkdGeG4wbkpaMzJMV2hYNWFrWVc3WEJOdWN1UlQzNlRVWHBzMXhqUmwyQT08L21lcmNoYW50X3NpZ24+PC9kb2N1bWVudD4=";
+			$response['user']=$user;
+	  }
+	}catch (Exception $e){
+            $response['error']=true;
+    }finally{
+            return Response::json($response);
+    }
+	}
+    public function postMessageAjax(Request $request, $match_id, $user_id)
+    {
+        $match = Match::findOrFail($match_id);
+
+        $chat = new Chat;
+
+        if ($user_id == $match->user_id OR in_array($user_id, $match->users->lists('id')->toArray())) {
+            $chat->match_id = $match->id;
+        }
+        else {
+            return redirect()->back();
+        }
+
+        $chat->user_id = $user_id;
+        $chat->message = $request->message;
+        $chat->save();
+
+        event(new AddedNewMessage($chat));
+
+        return response()->json([]);
+    }
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
 }

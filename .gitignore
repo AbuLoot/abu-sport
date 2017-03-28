@@ -2,8 +2,14 @@
 /public/storage
 /node_modules
 /public/img/organizations
+<<<<<<< HEAD
 /public/img/users
 Homestead.yaml
 Homestead.json
 .env
 
+=======
+Homestead.yaml
+Homestead.json
+.env
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca

@@ -51,8 +51,11 @@ class CreatedNewMatch extends Event implements ShouldBroadcast
             'date' => $this->match->date,
             'price' => $this->match->price,
             'matchType' => $this->match->match_type,
+<<<<<<< HEAD
 			'gameType' => $this->match->game_type,
 			'gameFormat' => $this->match->game_format,
+=======
+>>>>>>> d17d7416b768cec8a25706a117cbf130d1c8f5ca
             'usersCount' => 1 + $this->match->users->count(),
             'numberOfPlayers' => $this->match->number_of_players,
             'status' => $this->match->status,
