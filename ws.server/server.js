@@ -39,7 +39,7 @@ redis.on('pmessage', function (subscribed, channel, message) {
 	}
 	io.to(channel)
 		.emit(channel, message.data);
-		
+	// end
 });
 =======
 var io=require('socket.io')(6002);
