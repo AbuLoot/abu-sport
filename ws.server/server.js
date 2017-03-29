@@ -38,5 +38,5 @@ redis.on('pmessage', function (subscribed, channel, message) {
 	}
 	io.to(channel)
 		.emit(channel, message.data);
-		
+	// end
 });
