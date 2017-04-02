@@ -7,8 +7,8 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li class="active"><a href="#">Спорт</a></li>
-    <li><a href="{{ action('SportController@getHotMatches', 'football') }}">Горячие Матчи</a></li>
+    <li class="active"><a href="#">Главная</a></li>
+    <!-- <li><a href="{{ action('SportController@getHotMatches', 'football') }}">Горячие Матчи</a></li> -->
   </ul>
 
 @endsection

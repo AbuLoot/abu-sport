@@ -7,7 +7,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ url('/') }}">Спорт</a></li>
+    <li><a href="{{ url('/') }}">Главная</a></li>
     <li class="active"><a href="#">Матчи</a></li>
   </ul>
 
@@ -40,7 +40,7 @@
         </a>
       </div>
     @empty
-      <p>Ничего не найдено</p>
+      <h4>Ничего не найдено</h4>
     @endforelse
 
     {{ $matches->render() }}

@@ -71,6 +71,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('user-profile/{id}', 'UserController@userProfile');
     Route::get('add-to-friends/{id}', 'UserController@addToFriends');
     Route::get('accept/{id}', 'UserController@accept');
+    Route::get('feedback', 'UserController@feedback');
+    Route::post('feedback', 'UserController@storeFeedback');
 });
 
 

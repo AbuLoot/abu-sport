@@ -7,9 +7,9 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ url('/') }}">Спорт</a></li>
+    <li><a href="{{ url('/') }}">Главная</a></li>
     <li class="active"><a href="#">Площадки</a></li>
-    <li><a href="{{ action('SportController@getHotMatches', 'football') }}">Горячие матчи</a></li>
+    <li><a href="{{ action('SportController@getHotMatches', 'football') }}"><span class="glyphicon glyphicon-fire"></span> Горячие матчи</a></li>
   </ul>
 
 @endsection
@@ -33,7 +33,7 @@
         </div>
       @empty
         <div class="media">
-          <h5>Ничего не найдено</h5>
+          <h4>Ничего не найдено</h4>
         </div>
       @endforelse
     </div>

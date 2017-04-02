@@ -35,23 +35,23 @@ class Area extends Model
 
     public function getFieldsMatchesCountAttribute()
     {
-        $matches = 0;
+        $matchesCount = 0;
 
         foreach ($this->fields as $field)
         {
-		    $matchs=Match::select( DB::raw('CONCAT(date," ",end_time) as date_time'))
+		    $matches = Match::select(DB::raw('CONCAT(date, " ", end_time) as date_time'))
                 ->where('field_id', '=', $field->id)
-                ->where('date','>=',date('Y-m-d'))
-                ->where('status','=',1)->get();
+                ->where('date', '>=', date('Y-m-d'))
+                ->where('status','=', 1)->get();
 
-			foreach($matchs as $match)
+			foreach($matches as $match)
             {
-                if (strtotime($match->date_time)>=strtotime(date('Y-m-d H:i'))) {
-                    $matches++;	
+                if (strtotime($match->date_time) >= strtotime(date('Y-m-d H:i'))) {
+                    $matchesCount++;	
                 }
 			}
 	    }
 
-        return $matches;
+        return $matchesCount;
     }
 }

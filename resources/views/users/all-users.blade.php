@@ -6,7 +6,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="/friends">Все друзья</a></li>
+    <li><a href="/friends">Мои друзья</a></li>
     <li class="active"><a href="/all-users">Другие пользователи</a></li>
   </ul>
 

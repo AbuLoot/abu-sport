@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\User;
+use App\Feedback;
 use App\Http\Requests;
 
 class UserController extends Controller
@@ -68,5 +69,25 @@ class UserController extends Controller
         Auth::user()->acceptedFriendRequest($user);
 
         return redirect()->back()->with('info', 'Friend request accepted');
+    }
+
+    public function feedback()
+    {
+        return view('users.feedback');
+    }
+
+    public function storeFeedback(Request $request)
+    {
+        $this->validate($request, [
+            'text' => 'required|min:5|max:60'
+        ]);
+
+        $feedback = new Feedback;
+        $feedback->user_id = Auth::id();
+        $feedback->text = $request->text;
+        $feedback->email = Auth::user()->email;
+        $feedback->save();
+
+        return redirect('feedback')->with('status', 'Отзыв принят, Спасибо!');
     }
 }

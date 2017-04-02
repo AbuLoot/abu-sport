@@ -7,8 +7,9 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ url('/') }}">Спорт</a></li>
-    <li class="active"><a href="#">Горячие Матчи</a></li>
+    <li><a href="{{ action('SportController@getAreas', $sport->slug) }}">Площадки</a></li>
+    <li><a href="{{ action('SportController@getAreasWithMap', $sport->slug) }}">На карте</a></li>
+    <li class="active"><a href="#"><span class="glyphicon glyphicon-fire"></span> Горячие Матчи</a></li>
   </ul>
 
 @endsection

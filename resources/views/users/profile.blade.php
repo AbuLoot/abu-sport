@@ -3,7 +3,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-
+    <li class="active"><a href="#">Профиль</a></li>
   </ul>
 
 @endsection
@@ -12,7 +12,7 @@
 
   <div class="col-lg-8 col-md-8 col-sm-12">
     <div class="panel panel-default">
-      <div class="panel-heading">{{ $user->name }}</div>
+      <div class="panel-heading">Информация</div>
       <div class="panel-body">
 
         @include('partials.alerts')

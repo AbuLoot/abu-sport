@@ -5,7 +5,7 @@
   <ul class="tabs-panel">
     <li><a href="{{ action('SportController@getAreas', $sport->slug) }}">Площадки</a></li>
     <li class="active"><a href="#">На карте</a></li>
-    <li><a href="{{ action('SportController@getHotMatches', 'football') }}">Горячие матчи</a></li>
+    <li><a href="{{ action('SportController@getHotMatches', 'football') }}"><span class="glyphicon glyphicon-fire"></span> Горячие матчи</a></li>
   </ul>
 
 @endsection

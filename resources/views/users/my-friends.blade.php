@@ -3,7 +3,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li class="active"><a href="#">Все друзья</a></li>
+    <li class="active"><a href="#">Мои друзья</a></li>
     <li><a href="/all-users">Другие пользователи</a></li>
   </ul>
 

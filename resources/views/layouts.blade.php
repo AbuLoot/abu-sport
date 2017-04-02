@@ -93,18 +93,18 @@
 
           <ul class="nav nav-pills nav-stacked">
             @if (Auth::check())
-              <li><a href="/my-balance">Баланс <small id="balance" class="text-success">{{ Auth::user()->balance }}</small> <small class="text-success">тг</small></a></li>
+              <li><a href="/my-balance">Баланс <small id="balance" class="text-success">{{ Auth::user()->balance }}</small> <small class="text-success">〒</small></a></li>
               <li><a href="/my-profile">Мой профиль</a></li>
               <li><a href="/my-matches">Мои матчи <span class="badge">{{ Auth::user()->matches()->count() }}</span></a></li>
               <li><a href="/friends">Мои друзья <span class="badge">{{ Auth::user()->friends()->count() }}</span></a></li>
-              <li><a href="#">Уведомления <span class="badge">0</span></a></li>
-              <li><a href="#">Настройки</a></li>
+              <!-- <li><a href="#">Уведомления <span class="badge">0</span></a></li> -->
+              <!-- <li><a href="#">Настройки</a></li> -->
             @else
-              <li><a href="{{ url('login') }}">Войти</a></li>
-              <li><a href="{{ url('register') }}">Регистрация</a></li>
+              <li class="visible-xs-block visible-sm-block"><a href="{{ url('login') }}">Войти</a></li>
+              <li class="visible-xs-block visible-sm-block"><a href="{{ url('register') }}">Регистрация</a></li>
             @endif
-            <li><a href="#">Обратная связь</a></li>
-            <li><a href="#">Помощь</a></li>
+            <li><a href="{{ url('feedback') }}">Обратная связь</a></li>
+            <!-- <li><a href="#">Помощь</a></li> -->
           </ul>
         </aside>
 

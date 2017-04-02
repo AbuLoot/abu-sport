@@ -25,14 +25,14 @@
 
     @include('partials.alerts')
 
-    <h2 class="text-center">Матч {{ $match->id }} <small>{{ $match->matchDate }}</small></h2>
-
+    <div class="page-header">
+      <h1 class="text-center">Матч {{ $match->id }} <small>{{ $match->matchDate }}</small></h1>
+    </div>
     <div class="table-responsive">
       <table class="table table-room table-condensed">
         <thead>
           <tr>
             <th>Время игры</th>
-            <th>Адрес</th>
             <th>Игроков</th>
             <th>Цена</th>
             <th>Цена с игрока</th>
@@ -41,7 +41,6 @@
         <tbody>
           <tr>
             <td>{{ $match->timeFromTo }}</td>
-            <td>{{ $match->field->area->address }}</td>
             <td><span id="number-of-players">{{ $match->users_count }}</span>/{{ $match->number_of_players }}</td>
             <td>{{ $match->price }} тг</td>
             <td>{{ $match->price_for_each }}</td>

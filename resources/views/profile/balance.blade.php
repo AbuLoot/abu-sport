@@ -3,8 +3,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-
-
+    <li class="active"><a href="#">Мой баланс</a></li>
   </ul>
 
 @endsection
@@ -20,11 +19,7 @@
 
         <dl>
           <dt>Текущий баланс:</dt>
-          <dd>{{ $user->balance }}тг</dd>
-        </dl>
-        <dl>
-          <dt>Email:</dt>
-          <dd>{{ $user->email }}</dd>
+          <dd>{{ $user->balance }} тг</dd>
         </dl>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-info">
