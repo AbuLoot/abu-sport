@@ -2,6 +2,6 @@
 
 return [
 	
-	"key" => "2ba91f64bd56a34393a8aac0ca85719182592b1e"
+	"key" => "f474290ada98161c16c23726f9e22373c30940da"
 
 ];

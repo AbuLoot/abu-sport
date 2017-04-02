@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Validator;
 use Auth;
+use Validator;
 
 use App\Sport;
 use App\Area;
@@ -21,7 +21,7 @@ class MatchController extends Controller
 {
     public function getMatch($sport_slug, $area_id, $match_id)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $match = Match::findOrFail($match_id);
 
         return view('match.match', compact('sport', 'match'));
@@ -29,7 +29,7 @@ class MatchController extends Controller
 
     public function getChat($sport_slug, $area_id, $match_id)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $match = Match::findOrFail($match_id);
 
         return view('match.match-chat', compact('sport', 'match'));
@@ -39,7 +39,7 @@ class MatchController extends Controller
     {
         $sports = Sport::all();
         $areas = Area::all();
-        $active_area = Area::first();
+        $active_area = Area::firstOrFail();
 
         // Get days
         $days = $this->getDays($setDays);
@@ -49,8 +49,8 @@ class MatchController extends Controller
 
     public function createMatchInArea($sport_slug, $area_id, $setDays = 3)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
-        $area = $sport->areas()->where('id', $area_id)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
+        $area = $sport->areas()->where('id', $area_id)->firstOrFail();
 
         // Get days
         $days = $this->getDays($setDays);
@@ -123,7 +123,7 @@ class MatchController extends Controller
         }
 
         // Check field
-        $field = $area->fields()->where('id', $fields[0])->first();
+        $field = $area->fields()->where('id', $fields[0])->firstOrFail();
 
         if (is_null($field)) {
             return redirect()->back()->withInput()->withWarning('Нет данных');
@@ -249,7 +249,7 @@ class MatchController extends Controller
             return response()->json($messages);
         }
 
-        $field = $area->fields()->where('id', $fields[0])->first();
+        $field = $area->fields()->where('id', $fields[0])->firstOrFail();
 
         if (is_null($field)) {
             $messages['errors'][$index++] = 'Нет данных';
@@ -305,7 +305,7 @@ class MatchController extends Controller
             ->where('id', $request->match_id)
             ->firstOrFail();
 
-        if ($match->users()->wherePivot('user_id', $request->user()->id)->first()) {
+        if ($match->users()->wherePivot('user_id', $request->user()->id)->firstOrFail()) {
             return redirect()->back()->with('status', 'Вы уже в игре!');
         }
 
@@ -341,7 +341,7 @@ class MatchController extends Controller
             ->where('id', $request->match_id)
             ->firstOrFail();
 
-        if ($match->users()->wherePivot('user_id', $request->user()->id)->first()) {
+        if ($match->users()->wherePivot('user_id', $request->user()->id)->firstOrFail()) {
             $messages['errors'][0] = 'Вы уже в игре!';
             return response()->json($messages);
         }

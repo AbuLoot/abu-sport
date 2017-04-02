@@ -7,7 +7,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li>
+    <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li><a href="{{ action('SportController@getMatches', [$sport->slug, $area->id]) }}">Матчи</a></li>
     <li><a href="{{ action('SportController@getMatchesWithCalendar', [$sport->slug, $area->id]) }}">Календарь</a></li>
     <li class="active"><a href="#">Информация</a></li>
@@ -20,14 +20,14 @@
   <div class="col-lg-8 col-md-8 col-sm-12">
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-menu-left"></span> Главная</a></li>
-      <li><a href="{{ url('sport/'.$sport->slug) }}"><span class="glyphicon glyphicon-menu-left"></span> {{ $sport->title }}</a></li>
+      <li><a href="{{ url('sport/'.$sport->slug) }}">{{ $sport->title }}</a></li>
       <li class="active">{{ $area->title }}</li>
     </ol>
 
-    <div class="col-md-4">
-      <img src="/img/organizations/{{ $area->id.'/'.$area->image }}" class="center-block img-responsive">
+    <div class="col-md-6">
+      <img src="/img/organizations/{{ $area->org_id.'/'.$area->image }}" class="center-block img-responsive">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <table class="table">
         <tbody>
           <tr>

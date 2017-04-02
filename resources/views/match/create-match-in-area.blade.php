@@ -20,7 +20,7 @@
   <div class="col-lg-8 col-md-8 col-sm-12">
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-menu-left"></span> Главная</a></li>
-      <li><a href="{{ url('sport/'.$sport->slug) }}"><span class="glyphicon glyphicon-menu-left"></span> {{ $sport->title }}</a></li>
+      <li><a href="{{ url('sport/'.$sport->slug) }}">{{ $sport->title }}</a></li>
       <li class="active">{{ $area->title }}</li>
     </ol>
 
@@ -40,6 +40,7 @@
           <option value="18">18 игроков = 9 x 9</option>
           <option value="20">20 игроков = 10 x 10</option>
           <option value="22">22 игроков = 11 x 11</option>
+          <option value="24">24 игроков = 12 x 12</option>
         </select>
       </div>
       <div class="form-group">

@@ -11,6 +11,37 @@ use App\Http\Requests;
 
 class SportController extends Controller
 {
+    public function search(Request $request)
+    {
+        $text = trim(strip_tags($request->text));
+
+        $matches = Match::where('status', 1)
+            ->where(function($query) use ($text) {
+                return $query->where('id', $text)
+                ->whereDate('date', '>=', date('Y-m-d'))
+                ->orWhere('id', 'LIKE', '%'.$text.'%')
+                ->orWhere('description', 'LIKE', '%'.$text.'%');
+            })
+            ->paginate(10);
+
+        if ($matches->count() == 0) {
+
+            $areas = Area::where('status', 1)
+                ->where(function($query) use ($text) {
+                    return $query->where('title', 'LIKE', '%'.$text.'%')
+                    ->orWhere('description', 'LIKE', '%'.$text.'%')
+                    ->orWhere('address', 'LIKE', '%'.$text.'%');
+                })
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
+
+            return view('board.found-areas', compact('areas'));
+        }
+        else {
+            return view('board.found-matches', compact('matches'));
+        }
+    }
+
     public function getSports()
     {
     	$sports = Sport::all();
@@ -20,7 +51,7 @@ class SportController extends Controller
 
     public function getAreas($sport_slug)
     {
-    	$sport = Sport::where('slug', $sport_slug)->first();
+    	$sport = Sport::where('slug', $sport_slug)->firstOrFail();
     	$areas = $sport->areas()->paginate(10);
 
     	return view('board.areas', compact('sport', 'areas'));
@@ -28,7 +59,7 @@ class SportController extends Controller
 
     public function getAreasWithMap($sport_slug)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $areas = $sport->areas()->get();
 
         $data = [
@@ -65,7 +96,7 @@ class SportController extends Controller
 
     public function getMatches($sport_slug, $area_id, $date = '')
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $area = Area::find($area_id);
         $date = ($date) ? $date : date('Y-m-d');
 
@@ -75,9 +106,20 @@ class SportController extends Controller
         return view('board.matches', compact('sport', 'area', 'days', 'date'));
     }
 
+    public function getHotMatches($sport_slug)
+    {
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
+        $matches = Match::whereDate('date', '>=', date('Y-m-d'))
+            ->where('status', 1)
+            ->orderBy('created_at', 'ASC')
+            ->paginate(10);
+
+        return view('board.hot-matches', compact('sport', 'matches'));
+    }
+
     public function getInfo($sport_slug, $area_id)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $area = Area::find($area_id);
 
         return view('board.info', compact('sport', 'area'));
@@ -85,7 +127,7 @@ class SportController extends Controller
 
     public function getMatchesWithCalendar($sport_slug, $area_id, $setDays = 3)
     {
-        $sport = Sport::where('slug', $sport_slug)->first();
+        $sport = Sport::where('slug', $sport_slug)->firstOrFail();
         $area = Area::find($area_id);
 
         // Get days

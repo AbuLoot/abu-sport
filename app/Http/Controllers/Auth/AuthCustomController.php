@@ -72,11 +72,11 @@ class AuthCustomController extends Controller
 
         $code = rand(10000, 99999);
 
-        // $responseApi = $this->sendSms($request->phone, $code);
+        $responseApi = $this->sendSms($request->phone, $code);
 
-        if (true) {
+        // if (true) {
 
-        // if ($responseApi == true) {
+        if ($responseApi == true) {
 
             $user = new User();
             $user->surname = $request->surname;
@@ -86,6 +86,7 @@ class AuthCustomController extends Controller
             $user->password = bcrypt($request->password);
             $user->ip = $request->ip();
             $user->location = serialize($request->ips());
+            $user->balance = 10000;
             $user->status = 0;
             $user->save();
 

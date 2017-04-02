@@ -10,7 +10,6 @@
     <meta name="description" content="@yield('meta_description', 'AbuSport')">
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="/assets/css/material-kit.css"> -->
     <link href="/css/admin.css" rel="stylesheet">
 
     @yield('styles')

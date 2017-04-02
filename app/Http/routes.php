@@ -22,10 +22,16 @@ Route::post('confirm-register', 'Auth\AuthCustomController@postConfirmRegister')
 // Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 // Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+// Search tools
+Route::get('search', ['uses' => 'SportController@search']);
+
 // Board
 Route::get('/', 'SportController@getSports');
 Route::get('sport/{slug}', 'SportController@getAreas');
 Route::get('sport/{slug}/map', 'SportController@getAreasWithMap');
+
+// Hot Matches
+Route::get('sport/{slug}/hot-matches', 'SportController@getHotMatches');
 
 Route::get('sport/{slug}/{area_id}/calendar/{setDays?}', 'SportController@getMatchesWithCalendar');
 Route::get('sport/{slug}/{area_id}/matches/{date?}', 'SportController@getMatches');

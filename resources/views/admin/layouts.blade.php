@@ -98,7 +98,7 @@
             <li @if (Request::is('admin/lang', 'admin/lang/*')) class="active" @endif><a href="#/admin/lang">Языки</a></li>
             <li @if (Request::is('admin/settings', 'admin/settings/*')) class="active" @endif><a href="#/admin/settings">Настройки</a></li>
           </ul>
-        </div>        
+        </div>
       </div>
 
       <div class="col-md-12">

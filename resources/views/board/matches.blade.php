@@ -7,7 +7,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li>
+    <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li class="active"><a href="#">Матчи</a></li>
     <li><a href="{{ action('SportController@getMatchesWithCalendar', [$sport->slug, $area->id]) }}">Календарь</a></li>
     <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}">Информация</a></li>
@@ -20,7 +20,7 @@
   <div class="col-lg-8 col-md-8 col-sm-12">
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-menu-left"></span> Главная</a></li>
-      <li><a href="{{ url('sport/'.$sport->slug) }}"><span class="glyphicon glyphicon-menu-left"></span> {{ $sport->title }}</a></li>
+      <li><a href="{{ url('sport/'.$sport->slug) }}">{{ $sport->title }}</a></li>
       <li class="active">{{ $area->title }}</li>
     </ol>
 
@@ -43,7 +43,7 @@
         @endforeach
       </ul>
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-matches table-bordered">
           <thead>
             <tr>
               <th>Время старта</th>
@@ -74,12 +74,12 @@
                 @endforeach
 
                 @if ($game == false)
-                  <tr>
+                  <!-- <tr>
                     <td class="hours">{{ $hour }}</td>
                     <td><span>Время прошло</span></td>
                     <td></td>
                     <td></td>
-                  </tr>
+                  </tr> -->
                 @endif
               @else
                 <?php $game = false; ?>

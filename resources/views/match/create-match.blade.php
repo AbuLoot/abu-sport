@@ -54,6 +54,7 @@
           <option value="18">18 игроков = 9 x 9</option>
           <option value="20">20 игроков = 10 x 10</option>
           <option value="22">22 игроков = 11 x 11</option>
+          <option value="24">24 игроков = 12 x 12</option>
         </select>
       </div>
       <div class="form-group">

@@ -49,7 +49,7 @@ class AreaController extends Controller
             $imageName = 'preview-image-'.str_random(10).'.'.$request->image->getClientOriginalExtension();
             $imagePath = 'img/organizations/'.$request->org_id.'/'.$imageName;
 
-            $this->resizeImage($request->image, 200, 150, $imagePath, 100);
+            $this->resizeImage($request->image, 345, 200, $imagePath, 100);
             $area->image = $imageName;
         }
 
@@ -134,7 +134,7 @@ class AreaController extends Controller
             $imageName = 'preview-image-'.str_random(10).'.'.$request->image->getClientOriginalExtension();
             $imagePath = 'img/organizations/'.$request->org_id.'/'.$imageName;
 
-            $this->resizeImage($request->image, 200, 150, $imagePath, 100);
+            $this->resizeImage($request->image, 345, 200, $imagePath, 100);
             $area->image = $imageName;
         }
 
@@ -218,7 +218,7 @@ class AreaController extends Controller
 
     public function resizeImage($image, $width, $height, $path, $quality, $color = '#ffffff')
     {
-        // $frame = Image::canvas($width, $height, $color);
+        $frame = Image::canvas($width, $height, $color);
         $newImage = Image::make($image);
 
         if ($newImage->width() <= $newImage->height()) {
@@ -232,8 +232,12 @@ class AreaController extends Controller
             });
         }
 
-        // $frame->insert($newImage, 'center');
-        $newImage->save($path, $quality);
+        if ($newImage->width() > $width OR $newImage->height() > $height) {
+            $newImage->crop($width, $height);
+        }
+
+        $frame->insert($newImage, 'center');
+        $frame->save($path, $quality);
     }
 
     public function cropImage($image, $width, $height, $path, $quality)

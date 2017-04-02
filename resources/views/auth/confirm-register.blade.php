@@ -4,7 +4,7 @@
 
   <ul class="tabs-panel">
     <li><a href="{{ url('/login') }}">Вход</a></li>
-    <li class="active"><a href="#">Регистрация</a></li>
+    <li><a href="{{ url('/register') }}">Регистрация</a></li>
   </ul>
 
 @endsection
@@ -12,7 +12,7 @@
 @section('content')
 
   <div class="col-lg-8 col-md-8 col-sm-12">
-    <div class="panel panel-default">
+    <div class="panel panel-info">
       <div class="panel-heading">Подтверждение регистрации</div>
       <div class="panel-body">
 
@@ -36,7 +36,7 @@
           </div>
 
           <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
-            <label for="code" class="col-md-4 control-label">Код</label>
+            <label for="code" class="col-md-4 control-label">SMS Код</label>
 
             <div class="col-md-3">
               <input id="code" type="tel" class="form-control" name="code" value="{{ old('code') ? old('code') : '' }}"  data-toggle="tooltip" data-placement="right" title="Пример: 12345" minlength="5" maxlength="5" required>
@@ -46,6 +46,10 @@
                   <strong>{{ $errors->first('code') }}</strong>
                 </span>
               @endif
+            </div>
+
+            <div class="col-md-3">
+              <!-- <a class="btn btn-link" href="{{ url('') }}"><span class="glyphicon glyphicon-refresh"></span> Переотправить код</a> -->
             </div>
           </div>
 

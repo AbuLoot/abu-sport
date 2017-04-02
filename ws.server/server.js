@@ -13,6 +13,7 @@ io.on('connection', function(socket) {
 	});
 
 });
+
 redis.psubscribe('*', function(error, count) {
 	// 
 });
@@ -38,5 +39,4 @@ redis.on('pmessage', function (subscribed, channel, message) {
 	}
 	io.to(channel)
 		.emit(channel, message.data);
-	// end
 });

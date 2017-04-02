@@ -22,7 +22,7 @@
     <![endif]-->
   </head>
   <body class="">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
 
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,10 +37,10 @@
           </button>
 
           @if (Auth::check())
-            <a href="{{ url('create-match') }}" class="btn btn-success navbar-btn navbar-xs-btn navbar-right hidden-lg hidden-md"><span class="glyphicon glyphicon-plus"></span></a>
+            <!-- <a href="{{ url('create-match') }}" class="btn btn-success navbar-btn navbar-xs-btn navbar-right hidden-lg hidden-md"><span class="glyphicon glyphicon-plus"></span></a> -->
           @endif
 
-          <a class="navbar-brand" href="/">AbuSport</a>
+          <a class="navbar-brand" href="/">ABU SPORT</a>
         </div>
 
         <!-- Account system -->
@@ -48,9 +48,6 @@
           @if (Auth::guest())
             <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
           @else
-            <!-- <li>
-              <a href="{{ url('create-match') }}" class="text-success"><span class="glyphicon glyphicon-plus"></span> Создать матч</a>
-            </li> -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -68,11 +65,11 @@
         <!-- <button type="submit" class="btn btn-success navbar-btn navbar-right hidden-sm hidden-xs"><span class="glyphicon glyphicon-plus"></span> Создать матч</button> -->
 
         <!-- Search form -->
-        <form class="navbar-form navbar-right hidden-sm hidden-xs">
+        <form action="/search" method="get" class="navbar-form navbar-right hidden-sm hidden-xs">
           <div class="input-group">
-            <input type="search" class="form-control" placeholder="Поиск...">
+            <input type="search" name="text" class="form-control" minlength="2" maxlength="80" placeholder="Поиск..." required>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
             </span>
           </div>
         </form>
@@ -85,11 +82,11 @@
       <div class="row">
 
         <aside class="col-lg-2 col-md-2 navbar-offcanvas navbar-offcanvas-touch" id="js-bootstrap-offcanvas">
-          <form action="/" class="navbar-offcanvas-form hidden-lg hidden-md">
+          <form action="/search" method="get" class="navbar-offcanvas-form hidden-lg hidden-md">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Поиск...">
+              <input type="search" name="text" class="form-control" minlength="2" maxlength="80" placeholder="Поиск..." required>
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
               </span>
             </div>
           </form>
@@ -102,8 +99,10 @@
               <li><a href="/friends">Мои друзья <span class="badge">{{ Auth::user()->friends()->count() }}</span></a></li>
               <li><a href="#">Уведомления <span class="badge">0</span></a></li>
               <li><a href="#">Настройки</a></li>
+            @else
+              <li><a href="{{ url('login') }}">Войти</a></li>
+              <li><a href="{{ url('register') }}">Регистрация</a></li>
             @endif
-
             <li><a href="#">Обратная связь</a></li>
             <li><a href="#">Помощь</a></li>
           </ul>

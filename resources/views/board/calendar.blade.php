@@ -7,7 +7,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li>
+    <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li><a href="{{ action('SportController@getMatches', [$sport->slug, $area->id]) }}">Матчи</a></li>
     <li class="active"><a href="#">Календарь</a></li>
     <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}">Информация</a></li>
@@ -20,7 +20,7 @@
   <div class="col-lg-8 col-md-8 col-sm-12">
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-menu-left"></span> Главная</a></li>
-      <li><a href="{{ url('sport/'.$sport->slug) }}"><span class="glyphicon glyphicon-menu-left"></span> {{ $sport->title }}</a></li>
+      <li><a href="{{ url('sport/'.$sport->slug) }}">{{ $sport->title }}</a></li>
       <li class="active">{{ $area->title }}</li>
     </ol>
 
@@ -40,15 +40,15 @@
       </ul>
 
       <div class="table-responsive">
-        <table class="table table-hover table-bordered">
+        <table class="table table-matches table-hover table-bordered">
           <thead>
             <tr>
               <th class="empty-th text-center h3"><span class="glyphicon glyphicon-time"></span></th>
               @foreach($days as $day)
                 @if ($current_date == $day['year'])
-                  <th class="bg-info" @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['day'] }}<br>{{$day['weekday'] }}</th>
+                  <th class="bg-info" @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['weekday'] }}<br>{{$day['day'] }}</th>
                 @else
-                  <th @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['day'] }}<br>{{$day['weekday'] }}</th>
+                  <th @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['weekday'] }}<br>{{$day['day'] }}</th>
                 @endif
               @endforeach
             </tr>
