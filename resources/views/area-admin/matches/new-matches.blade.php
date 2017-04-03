@@ -111,7 +111,7 @@
       });
 
       // Create match
-      $('table').on('click', 'a#rsun', function(e){
+      $('table').on('click', 'a#run', function(e){
         e.preventDefault();
 
         // alert($(this).data('match-id'));
