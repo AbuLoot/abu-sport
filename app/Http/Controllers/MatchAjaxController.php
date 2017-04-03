@@ -15,6 +15,7 @@ use App\Events\LeftMatch;
 use App\Events\JoinedToMatch;
 use App\Events\NotifyNewMatch;
 use App\Events\NotifyNewPlayer;
+use App\Events\NotifyLeftPlayer;
 use App\Events\CreatedNewMatch;
 
 class MatchAjaxController extends Controller
@@ -184,7 +185,7 @@ class MatchAjaxController extends Controller
         // User joined to match
         event(new JoinedToMatch($match, Auth::id()));
 
-        event(new NotifyNewPlayer($match->id, $match->users()->count(), Auth::user()->surname . ' ' . Auth::user()->name));
+        event(new NotifyNewPlayer($match->id, $match->users()->count(), Auth::id(), Auth::user()->surname . ' ' . Auth::user()->name));
 
         $messages['success'] = 'Вы в игре!';
         $messages['csrf'] = csrf_token();
@@ -210,6 +211,8 @@ class MatchAjaxController extends Controller
 
         // User left from match
         event(new LeftMatch($match, $request->user()->id));
+
+        event(new NotifyLeftPlayer($match->id, Auth::id()));
 
         $messages['success'][0] = 'Вы вышли из игры!';
         return response()->json($messages);

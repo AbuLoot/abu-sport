@@ -16,6 +16,7 @@ use App\Events\LeftMatch;
 use App\Events\JoinedToMatch;
 use App\Events\NotifyNewMatch;
 use App\Events\NotifyNewPlayer;
+use App\Events\NotifyLeftPlayer;
 use App\Events\CreatedNewMatch;
 
 class MatchController extends Controller
@@ -198,7 +199,7 @@ class MatchController extends Controller
         // User joined to match
         event(new JoinedToMatch($match, Auth::id()));
 
-        event(new NotifyNewPlayer($match->id, $match->users()->count(), Auth::user()->surname . ' ' . Auth::user()->name));
+        event(new NotifyNewPlayer($match->id, $match->users()->count(), Auth::id(), Auth::user()->surname . ' ' . Auth::user()->name));
 
         return redirect()->back()->with('status', 'Вы в игре!');
     }
@@ -222,6 +223,8 @@ class MatchController extends Controller
 
         // User left from match
         event(new LeftMatch($match, $request->user()->id));
+
+        event(new NotifyLeftPlayer($match->id, Auth::id()));
 
         return redirect()->back()->with('info', 'Вы вышли из игры!');
     }

@@ -63,7 +63,7 @@
       <?php $i = 1; ?>
       <li class="list-group-item">{{ $i++ . ' ' . $match->user->surname . ' ' . $match->user->name }} [Организатор]</li>
       @foreach($match->users as $user)
-        <li class="list-group-item">{{ $i++ . ' ' . $user->surname . ' ' . $user->name }}</li>
+        <li class="list-group-item" id="user-{{ $user->id }}">{{ $i++ . ' ' . $user->surname . ' ' . $user->name }}</li>
       @endforeach
     </ul>
   </div>
@@ -103,11 +103,14 @@
         }
 
         block.scrollTop = block.scrollHeight;
-      } else {
+      } else if (data.view == 2) {
 
         $('.list-group').append(
-          '<li class="list-group-item list-group-item-success">' + data.number + ' ' + data.fullname + '</li>'
+          '<li class="list-group-item list-group-item-success" id="user-' + data.userId + '">' + data.number + ' ' + data.fullname + '</li>'
         );
+      } else {
+
+        $('#user-' + data.userId).remove();
       }
 
       socket.emit('mess', data);

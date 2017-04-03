@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-
 use App\Match;
 use App\Events\Event;
 
