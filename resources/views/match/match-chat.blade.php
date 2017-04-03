@@ -8,7 +8,7 @@
 
   <ul class="tabs-panel">
     <li><a href="{{ url('sport/'.$sport->slug.'/'.$match->field->area_id.'/match/'.$match->id) }}">Комната</a></li>
-    <li class="active"><a href="#">Чат</a></li>
+    <li class="active"><a href="#"><span class="glyphicon glyphicon-send"></span> Чат</a></li>
   </ul>
 
 @endsection
@@ -94,15 +94,23 @@
 
     socket.on(channel, function(data) {
 
-      if (data.user_id == user_id) {
-        appendMessage(data, 'text-right');
+      if (data.view == 1) {
+
+        if (data.user_id == user_id) {
+          appendMessage(data, 'text-right');
+        } else {
+          appendMessage(data);
+        }
+
+        block.scrollTop = block.scrollHeight;
       } else {
-        appendMessage(data);
+
+        $('.list-group').append(
+          '<li class="list-group-item list-group-item-success">' + data.number + ' ' + data.fullname + '</li>'
+        );
       }
 
-      block.scrollTop = block.scrollHeight;
-	  
-	  socket.emit('mess', data);
+      socket.emit('mess', data);
     });
 
     function appendMessage(data, mediaClass) {

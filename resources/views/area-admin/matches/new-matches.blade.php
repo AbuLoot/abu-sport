@@ -53,7 +53,7 @@
                   <td class="text-danger">Неактивен</td>
                 @endif
                 <td class="text-right">
-                  <a class="btn btn-primary btn-xs" id="run" href="{{ url('panel/admin-matches/'.$match->id.'/start') }}" data-match-id="{{ $match->field_id . '-' . $match->id }}" title="Запустить"><span class="glyphicon glyphicon-play"></span></a>
+                  <a class="btn btn-primary btn-xs" id="run" href="{{ url('panel/admin-matches/'.$match->field_id.'-'.$match->id.'/start') }}" data-match-id="{{ $match->field_id . '-' . $match->id }}" title="Запустить"><span class="glyphicon glyphicon-play"></span></a>
                   <form method="POST" action="{{ url('panel/admin-matches/'.$match->id) }}" accept-charset="UTF-8" class="btn-delete">
                     <input name="_method" type="hidden" value="DELETE">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -101,7 +101,7 @@
                 '<td>' + matchType + '</td>' +
                 '<td class="text-danger">Неактивен</td>' +
                 '<td class="text-right">' +
-                  '<a class="btn btn-primary btn-xs" id="run" href="/panel/admin-matches/' + data.id + '/start" data-match-id="' + data.fieldId + '-' + data.id + '" title="Запустить"><span class="glyphicon glyphicon-play"></span></a>' +
+                  '<a class="btn btn-primary btn-xs" id="run" href="/panel/admin-matches/' + data.fieldId + '-' + data.id + '/start" data-match-id="' + data.fieldId + '-' + data.id + '" title="Запустить"><span class="glyphicon glyphicon-play"></span></a>' +
                 '</td>' +
               '</tr>';
 
@@ -111,7 +111,7 @@
       });
 
       // Create match
-      $('table').on('click', 'a#run', function(e){
+      $('table').on('click', 'a#rsun', function(e){
         e.preventDefault();
 
         // alert($(this).data('match-id'));

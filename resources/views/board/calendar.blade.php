@@ -10,7 +10,7 @@
     <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li><a href="{{ action('SportController@getMatches', [$sport->slug, $area->id]) }}">Матчи</a></li>
     <li class="active"><a href="#">Календарь</a></li>
-    <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}">Информация</a></li>
+    <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-info-sign"></span> Информация</a></li>
   </ul>
 
 @endsection
@@ -89,8 +89,8 @@
                     @endif
                   @else
                     <?php $game = false; ?>
+                    <?php $id = $field->id.'-'.$day['year'].'-'.$hour_key; ?>
                     @foreach($field->matches->where('date', $day['year']) as $match)
-                      <?php $id = $field->id.'-'.$day['year'].'-'.$hour_key; ?>
                       @if ($match->start_time <= $hour AND $match->end_time >= $hour)
                         <?php $game = true; ?>
                         @if ($match->status == 0)
@@ -108,7 +108,6 @@
                     @endforeach
 
                     @if ($game == false)
-                      <?php $id = $field->id.'-'.$day['year'].'-'.$hour_key; ?>
                       <td id="td-{{ $id }}">
                         <span>Свободно</span>
                       </td>

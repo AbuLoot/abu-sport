@@ -8,7 +8,7 @@
 
   <ul class="tabs-panel">
     <li class="active"><a href="#">Комната</a></li>
-    <li><a href="{{ url('sport/'.$sport->slug.'/'.$match->field->area_id.'/match-chat/'.$match->id) }}">Чат</a></li>
+    <li><a href="{{ url('sport/'.$sport->slug.'/'.$match->field->area_id.'/match-chat/'.$match->id) }}"><span class="glyphicon glyphicon-send"></span> Чат</a></li>
   </ul>
 
 @endsection
@@ -136,7 +136,7 @@
             matchId = '{{ $match->id }}';
 
         if (matchId != '') {
-          var $btn = $(this).button('loading');
+          var $btn = $(this).button('запрос');
           $.ajax({
             type: "POST",
             url: '/join-match-ajax/'+matchId,

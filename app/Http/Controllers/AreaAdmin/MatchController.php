@@ -75,6 +75,32 @@ class MatchController extends Controller
         return view('area-admin.matches.index', compact('area', 'matches'));
     }
 
+    public function start($id)
+    {
+        list($field_id, $match_id) = explode('-', $id);
+        $messages = [];
+        $index = 0;
+
+        $area = Area::where('org_id', $this->organization->id)->first();
+
+        // Check field
+        $field = $area->fields()->where('id', $field_id)->first();
+
+        if (is_null($field)) {
+            return redirect()->back()->with('warning', 'Нет данных');
+        }
+
+        // Start match
+        $match = $field->matches()->where('id', $match_id)->first();
+        $match->status = 1;
+        $match->save();
+
+        // Notify All Users
+        event(new StartedMatch($match, $area->sport->slug));
+
+        return redirect()->back()->with('status', 'Матч начат!');
+    }
+
     public function ajaxStart($id)
     {
         list($field_id, $match_id) = explode('-', $id);
@@ -101,33 +127,6 @@ class MatchController extends Controller
 
         $messages['success'] = 'Матч начат!';
         return response()->json($messages);
-    }
-
-    public function start($id)
-    {
-        list($field_id, $match_id) = explode('-', $id);
-        $messages = [];
-        $index = 0;
-
-        $area = Area::where('org_id', $this->organization->id)->first();
-
-        // Check field
-        $field = $area->fields()->where('id', $field_id)->first();
-
-        if (is_null($field)) {
-            $messages['errors'][$index++] = 'Нет данных';
-            return response()->json($messages);
-        }
-
-        // Start match
-        $match = $field->matches()->where('id', $match_id)->first();
-        $match->status = 1;
-        $match->save();
-
-        // Notify All Users
-        event(new StartedMatch($match, $area->sport->slug));
-
-        return redirect()->back()->with('status', 'Матч начат!');
     }
 
     public function destroy($id)

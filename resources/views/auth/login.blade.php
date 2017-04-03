@@ -12,7 +12,7 @@
 @section('content')
 
   <div class="col-lg-8 col-md-8 col-sm-12">
-    <div class="panel panel-default">
+    <div class="panel panel-success">
       <div class="panel-heading">Войдите в систему</div>
       <div class="panel-body">
 

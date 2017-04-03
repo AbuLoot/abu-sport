@@ -10,7 +10,7 @@
     <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li class="active"><a href="#">Матчи</a></li>
     <li><a href="{{ action('SportController@getMatchesWithCalendar', [$sport->slug, $area->id]) }}">Календарь</a></li>
-    <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}">Информация</a></li>
+    <li><a href="{{ action('SportController@getInfo', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-info-sign"></span> Информация</a></li>
   </ul>
 
 @endsection
@@ -59,8 +59,8 @@
               @if ($current_date >= $date AND $current_hour >= $hour)
                 <?php $game = false;?>
                 @foreach ($field->matches->where('date', $date)->where('status', 1) as $num => $match)
-                  <tr>
-                    @if ($match->start_time <= $hour AND $match->end_time >= $hour)
+                  @if ($match->start_time <= $hour AND $match->end_time >= $hour)
+                    <tr>
                       <td class="hours">{{ $hour }}</td>
                       <td>
                         <span class="glyphicon glyphicon-time"></span> Матч {{ $match->id }}
@@ -69,8 +69,8 @@
                       <td>{{ $match->usersCount.'/'.$match->number_of_players }}</td>
                       <td>{{ $match->price }} тг</td>
                       <?php $game = true; ?>
-                    @endif
-                  </tr>
+                    </tr>
+                  @endif
                 @endforeach
 
                 @if ($game == false)
@@ -83,10 +83,10 @@
                 @endif
               @else
                 <?php $game = false; ?>
+                <?php $id = $field->id.'-'.$date.'_'.$hour_key; ?>
                 @foreach ($field->matches->where('date', $date) as $match)
                   @if ($match->start_time <= $hour AND $match->end_time >= $hour)
                     <?php $game = true; ?>
-                    <?php $id = $field->id.'-'.$date.'_'.$hour_key; ?>
                     <tr id="{{ $id }}">
                       <td class="hours">{{ $hour }}</td>
                       @if ($match->status == 1)
@@ -103,8 +103,7 @@
                         </td>
                       @else
                         <td>
-                          <span class="glyphicon glyphicon-refresh spin"></span>
-                          <span>В обработке</span>
+                          <span class="glyphicon glyphicon-refresh spin"></span> <span>В обработке</span>
                         </td>
                       @endif
                       <td>{{ $match->users_count.'/'.$match->number_of_players }}</td>
@@ -115,7 +114,6 @@
 
                 @if ($game == false)
                   <?php $game = true; ?>
-                  <?php $id = $field->id.'-'.$date.'_'.$hour_key; ?>
                   @foreach($field->schedules->where('week', $index_weekday) as $schedule)
                     @if ($schedule->start_time <= $hour AND $schedule->end_time >= $hour)
                       <tr id="{{ $id }}" class="bg-info">
@@ -173,7 +171,7 @@
             rowId = data.fieldId + '-' + data.date + '_' + +startTime[0];
             newRowId =
               '<tr id="' + rowId + '">' +
-                '<td>' + startTime[0]++ + ':00</td>' +
+                '<td class="hours">' + startTime[0]++ + ':00</td>' +
                 '<td><span class="glyphicon glyphicon-refresh"></span> <span>В обработке</span></td>' +
                 '<td>' + data.usersCount + '/' + data.numberOfPlayers + '</td>' +
                 '<td>' + data.price + ' тг</td>' +
@@ -192,7 +190,7 @@
             rowId = data.fieldId + '-' + data.date + '_' + +startTime[0];
             newRowId =
               '<tr id="' + rowId + '">' +
-                '<td>' + startTime[0]++ + ':00</td>' +
+                '<td class="hours">' + startTime[0]++ + ':00</td>' +
                 '<td><span class="glyphicon glyphicon-time"></span> <a href="/sport/' + data.sportSlug + '/' + data.areaId + '/match/' + data.id + '">Игра  ' + data.id + matchType + '</a></td>' +
                 '<td>' + data.usersCount + '/' + data.numberOfPlayers + '</td>' +
                 '<td>' + data.price + ' тг</td>' +

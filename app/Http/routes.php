@@ -46,14 +46,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('sport/{slug}/{area_id}/match-chat/{match_id}/', 'MatchController@getChat');
 
     Route::post('store-match', 'MatchController@storeMatch');
-    Route::post('store-match-ajax', 'MatchController@storeMatchAjax');
+    Route::post('store-match-ajax', 'MatchAjaxController@storeMatch');
 
     Route::post('join-match/{match_id}', 'MatchController@joinMatch');
-    Route::post('join-match-ajax/{match_id}', 'MatchController@joinMatchAjax');
+    Route::post('join-match-ajax/{match_id}', 'MatchAjaxController@joinMatch');
 
     Route::post('left-match/{match_id}', 'MatchController@leftMatch');
-    Route::post('left-match-ajax/{match_id}', 'MatchController@leftMatchAjax');
+    Route::post('left-match-ajax/{match_id}', 'MatchAjaxController@leftMatch');
 
+    // Chat
     Route::post('chat/message/{match_id}', 'ChatController@postMessage');
     Route::post('chat/message-ajax/{match_id}', 'ChatController@postMessageAjax');
 

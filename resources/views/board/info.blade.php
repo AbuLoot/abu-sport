@@ -10,7 +10,7 @@
     <!-- <li><a href="{{ action('MatchController@createMatchInArea', [$sport->slug, $area->id]) }}"><span class="glyphicon glyphicon-plus"></span> Создать матч</a></li> -->
     <li><a href="{{ action('SportController@getMatches', [$sport->slug, $area->id]) }}">Матчи</a></li>
     <li><a href="{{ action('SportController@getMatchesWithCalendar', [$sport->slug, $area->id]) }}">Календарь</a></li>
-    <li class="active"><a href="#">Информация</a></li>
+    <li class="active"><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Информация</a></li>
   </ul>
 
 @endsection
@@ -33,10 +33,6 @@
           <tr>
             <td>Название</td>
             <td>{{ $area->title }}</td>
-          </tr>
-          <tr>
-            <td>Номер</td>
-            <td>{{ $area->sort_id }}</td>
           </tr>
           <tr>
             <td>Компания</td>

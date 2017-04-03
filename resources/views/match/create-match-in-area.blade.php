@@ -69,7 +69,7 @@
           </ul>
 
           <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table class="table table-matches table-hover table-bordered">
               <thead>
                 <tr>
                   <th class="empty-th text-center h3"><span class="glyphicon glyphicon-time"></span></th>

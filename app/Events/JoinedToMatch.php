@@ -21,10 +21,10 @@ class JoinedToMatch extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Match $match, $userid)
+    public function __construct(Match $match, $user_id)
     {
         $this->match = $match;
-        $this->user = $match->users()->wherePivot('user_id', $userid)->first();
+        $this->user = $match->users()->wherePivot('user_id', $user_id)->first();
     }
 
     /**
