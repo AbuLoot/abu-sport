@@ -46,7 +46,7 @@
         <!-- Account system -->
         <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
           @if (Auth::guest())
-            <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
           @else
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
@@ -55,7 +55,7 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="/my-profile/edit">Изменить</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{{ url('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
               </ul>
             </li>
           @endif
@@ -99,11 +99,12 @@
               <li><a href="/friends">Мои друзья <span class="badge">{{ Auth::user()->friends()->count() }}</span></a></li>
               <!-- <li><a href="#">Уведомления <span class="badge">0</span></a></li> -->
               <!-- <li><a href="#">Настройки</a></li> -->
+              <li><a href="/feedback">Обратная связь</a></li>
+              <li><a href="/logout">Выход</a></li>
             @else
-              <li class="visible-xs-block visible-sm-block"><a href="{{ url('login') }}">Войти</a></li>
-              <li class="visible-xs-block visible-sm-block"><a href="{{ url('register') }}">Регистрация</a></li>
+              <li class="visible-xs-block visible-sm-block"><a href="/login">Войти</a></li>
+              <li class="visible-xs-block visible-sm-block"><a href="/register">Регистрация</a></li>
             @endif
-            <li><a href="{{ url('feedback') }}">Обратная связь</a></li>
             <!-- <li><a href="#">Помощь</a></li> -->
           </ul>
         </aside>

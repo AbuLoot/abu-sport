@@ -130,7 +130,7 @@
                             <?php $id = $field->id.'-'.$day['year'].'-'.$hour_key; ?>
                             @if ($schedule->start_time <= $hour AND $schedule->end_time >= $hour)
                               <td id="td-{{ $id }}">
-                                <label class="checkbox-inline" data-toggle="tooltip" data-placement="right" title="{{ $schedule->price }} тг">
+                                <label class="checkbox-inline" data-toggle="tooltip" data-placement="left" title="{{ $schedule->price }} 〒">
                                   <input type="checkbox" name="hours[]" data-price="{{ $schedule->price }}"  data-id="{{ $id }}" value="{{ $field->id.' '.$day['year'].' '.$hour }}"> Купить
                                 </label>
                               </td>
