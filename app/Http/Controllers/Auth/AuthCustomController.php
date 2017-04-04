@@ -49,7 +49,7 @@ class AuthCustomController extends Controller
             'surname' => 'required|min:2|max:40',
             'name' => 'required|min:2|max:40',
             'phone' => 'required|min:11|max:11|unique:users',
-            'email' => 'required|email|max:255|unique:users',
+            // 'email' => 'required|email|max:255|unique:users',
             'sex' => 'required',
             'password' => 'required|min:6|max:255',
             'rules' => 'accepted'
@@ -74,15 +74,13 @@ class AuthCustomController extends Controller
 
         $responseApi = $this->sendSms($request->phone, $code);
 
-        // if (true) {
-
         if ($responseApi == true) {
 
             $user = new User();
             $user->surname = $request->surname;
             $user->name = $request->name;
             $user->phone = $request->phone;
-            $user->email = $request->email;
+            // $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->ip = $request->ip();
             $user->location = serialize($request->ips());
