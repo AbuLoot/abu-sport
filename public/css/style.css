@@ -193,6 +193,14 @@ td.status-matches > div > label {
   text-align: right;
 }
 
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  color: #fff;
+  background-color: #5cb85c;
+  border-bottom-color: transparent;
+}
+
 /* Table room */
 .table-room > thead > tr > th:not(:first-child),
 .table-room > tbody > tr > td:not(:first-child) {

@@ -35,10 +35,10 @@
       <ul class="nav nav-tabs">
         @foreach ($days as $day)
           @if ($day['year'] == $date)
-            <li class="active"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches/'.$day['year']) }}">{{ $day['day'].' '.$day['short_weekday'] }}</a></li>
+            <li class="active"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches/'.$day['year']) }}"><b>{{ $day['short_weekday'].', '.$day['day'] }}</b></a></li>
             <?php $index_weekday = (int) $day['index_weekday']; ?>
           @else
-            <li><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches/'.$day['year']) }}">{{ $day['day'].' '.$day['short_weekday'] }}</a></li>
+            <li><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches/'.$day['year']) }}">{{ $day['short_weekday'].', '.$day['day'] }}</a></li>
           @endif
         @endforeach
       </ul>
