@@ -50,6 +50,40 @@
               <input type="text" class="form-control" id="size" name="size" maxlength="5" value="{{ (old('size')) ? old('size') : $field->size }}">
             </div>
             <div class="form-group">
+              <label for="images">Галерея</label><br>
+              <?php $images = unserialize($field->images); ?>
+              @for ($i = 0; $i < 4; $i++)
+                @if (isset($images[$i]))
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width:300px;height:200px;">
+                      <img src="/img/organizations/{{ $field->org_id.'/'.$images[$i]['mini_image'] }}">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="width:300px;height:200px;" data-trigger="fileinput"></div>
+                    <div>
+                      <span class="btn btn-default btn-sm btn-file">
+                        <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Изменить</span>
+                        <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
+                        <input type="file" name="images[]" accept="image/*">
+                      </span>
+                      <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
+                    </div>
+                  </div>
+                @else
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-preview thumbnail" style="width:300px;height:200px;" data-trigger="fileinput"></div>
+                    <div>
+                      <span class="btn btn-default btn-sm btn-file">
+                        <span class="fileinput-new"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; Выбрать</span>
+                        <span class="fileinput-exists"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;</span>
+                        <input type="file" name="images[]" accept="image/*">
+                      </span>
+                      <a href="#" class="btn btn-default btn-sm fileinput-exists" data-dismiss="fileinput"><i class="glyphicon glyphicon-trash"></i> Удалить</a>
+                    </div>
+                  </div>
+                @endif
+              @endfor
+            </div>
+            <div class="form-group">
               <label for="status">Статус:</label>
               <label>
                 <input type="checkbox" id="status" name="status" @if ($field->status == 1) checked @endif> Активен
@@ -61,4 +95,12 @@
           </form>
         </div>
       </div>
+@endsection
+
+@section('styles')
+  <link href="/css/jasny-bootstrap.min.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+  <script src="/js/jasny-bootstrap.js"></script>
 @endsection

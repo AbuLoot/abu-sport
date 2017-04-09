@@ -144,6 +144,10 @@ class AreaController extends Controller
             });
         }
 
+        if ($newImage->width() > $width OR $newImage->height() > $height) {
+            $newImage->crop($width, $height);
+        }
+
         $frame->insert($newImage, 'center');
         $frame->save($path, $quality);
     }

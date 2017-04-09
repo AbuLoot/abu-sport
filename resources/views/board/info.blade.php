@@ -69,7 +69,49 @@
         </tbody>
       </table>
     </div>
+
+    @if ($area->images)
+      <div id="area-images" class="carousel" data-ride="carousel" data-interval="false">
+        <div class="carousel-inner" role="listbox">
+          <?php $i = 0; $images = unserialize($area->images); ?>
+          @foreach ($images as $key => $image)
+            @if ($i == 0)
+              <div class="item active">
+                <img src="/img/organizations/{{ $area->org_id.'/'.$image['image'] }}" class="img-responsive">
+              </div>
+              <?php $i++; ?>
+            @else
+              <div class="item">
+                <img src="/img/organizations/{{ $area->org_id.'/'.$image['image'] }}" class="img-responsive">
+              </div>
+            @endif
+          @endforeach
+        </div>
+      </div><br>
+      <ol class="list-inline">
+        <?php $i = 0; ?>
+        @foreach ($images as $key => $image)
+          @if ($i == 0)
+            <li data-target="#area-images" data-slide-to="0" class="col-xs-3 col-sm-2 col-md-2 active">
+              <a href="#">
+                <img src="/img/organizations/{{ $area->org_id.'/'.$image['mini_image'] }}" class="img-responsive">
+              </a>
+            </li> 
+          @else
+            <li data-target="#area-images" data-slide-to="{{ $i }}" class="col-xs-3 col-sm-2 col-md-2">
+              <a href="#">
+                <img src="/img/organizations/{{ $area->org_id.'/'.$image['mini_image'] }}" class="img-responsive">
+              </a>
+            </li>
+          @endif
+          <?php $i++; ?>
+        @endforeach
+      </ol>
+      <div class="clearfix"></div><br>
+    @endif
+
   </div>
+
   <div class="col-lg-2 col-md-2 col-sm-12">
     <a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/create-match') }}" class="btn btn-primary text-uppercase pull-right"><span class="glyphicon glyphicon-plus"></span> Создать матч</a>
   </div>

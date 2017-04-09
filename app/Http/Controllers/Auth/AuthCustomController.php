@@ -51,7 +51,7 @@ class AuthCustomController extends Controller
             'phone' => 'required|min:11|max:11|unique:users',
             // 'email' => 'required|email|max:255|unique:users',
             'sex' => 'required',
-            'password' => 'required|min:6|max:255',
+            'password' => 'required|confirmed|min:6|max:255',
             'rules' => 'accepted'
         ]);
 

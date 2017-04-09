@@ -134,7 +134,7 @@
                     </div>
                   </div>
                 @else
-                  <div class="fileinput fileinput-new" style="width:300px;height:200px;" data-provides="fileinput">
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-preview thumbnail" style="width:300px;height:200px;" data-trigger="fileinput"></div>
                     <div>
                       <span class="btn btn-default btn-sm btn-file">

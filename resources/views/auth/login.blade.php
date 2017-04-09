@@ -4,7 +4,7 @@
 
   <ul class="tabs-panel">
     <li class="active"><a href="#">Вход</a></li>
-    <li><a href="{{ url('/register') }}">Регистрация</a></li>
+    <li><a href="/register">Регистрация</a></li>
   </ul>
 
 @endsection
@@ -18,7 +18,7 @@
 
         @include('partials.alerts')
 
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+        <form class="form-horizontal" role="form" method="POST" action="/login">
           {{ csrf_field() }}
 
           <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
@@ -65,7 +65,7 @@
                 <span class="glyphicon glyphicon-log-in"></span> Войти
               </button>
 
-              <a class="btn btn-link" href="{{ url('/password/reset') }}">Забыли пароль?</a>
+              <a class="btn btn-link" href="/password/reset">Забыли пароль?</a>
             </div>
           </div>
         </form>

@@ -22,7 +22,7 @@ class CreateAreasTable extends Migration
             $table->string('slug');
             $table->string('title');
             $table->string('image');
-            $table->string('images');
+            $table->text('images');
             $table->string('phones');
             $table->string('emails');
             $table->string('address');

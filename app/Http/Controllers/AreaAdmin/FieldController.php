@@ -43,6 +43,37 @@ class FieldController extends Controller
             'title' => 'required|max:60',
         ]);
 
+        // Creating gallery images
+        if ($request->hasFile('images')) {
+
+            $images = [];
+
+            if ( ! file_exists('img/organizations/'.$request->org_id)) {
+                mkdir('img/organizations/'.$request->org_id);
+            }
+
+            foreach ($request->file('images') as $key => $image)
+            {
+                if (isset($image)) {
+
+                    $imageName = 'image-'.$key.'-'.str_random(10).'.'.$image->getClientOriginalExtension();
+
+                    // Creating images
+                    $imagePath = 'img/organizations/'.$request->org_id.'/'.$imageName;
+                    $this->resizeImage($image, 800, 400, $imagePath, 100);
+
+                    // Creating mini images
+                    $imagePath = 'img/organizations/'.$request->org_id.'/mini-'.$imageName;
+                    $this->resizeImage($image, 400, 200, $imagePath, 100);
+
+                    $images[$key]['image'] = $imageName;
+                    $images[$key]['mini_image'] = 'mini-'.$imageName;
+                }
+            }
+
+            $area->images = serialize($images);
+        }
+
         $field = new Field;
         $field->sort_id = ($request->sort_id > 0) ? $request->sort_id : $field->count() + 1;
         $field->area_id = $request->area_id;
@@ -91,5 +122,40 @@ class FieldController extends Controller
         $field->delete();
 
         return redirect('panel/admin-fields')->with('status', 'Запись удалена!');
+    }
+
+    public function resizeImage($image, $width, $height, $path, $quality, $color = '#ffffff')
+    {
+        $frame = Image::canvas($width, $height, $color);
+        $newImage = Image::make($image);
+
+        if ($newImage->width() <= $newImage->height()) {
+            $newImage->resize(null, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+        else {
+            $newImage->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        if ($newImage->width() > $width OR $newImage->height() > $height) {
+            $newImage->crop($width, $height);
+        }
+
+        $frame->insert($newImage, 'center');
+        $frame->save($path, $quality);
+    }
+
+    public function cropImage($image, $width, $height, $path, $quality)
+    {
+        $newImage = Image::make($image);
+
+        if ($newImage->width() > $width OR $newImage->height() > $height) {
+            $newImage->crop($width, $height);
+        }
+
+        $newImage->save($path, $quality);
     }
 }

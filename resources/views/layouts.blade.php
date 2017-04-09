@@ -40,7 +40,8 @@
             <!-- <a href="{{ url('create-match') }}" class="btn btn-success navbar-btn navbar-xs-btn navbar-right hidden-lg hidden-md"><span class="glyphicon glyphicon-plus"></span></a> -->
           @endif
 
-          <a class="navbar-brand" href="/">ABU SPORT</a>
+          <a class="navbar-brand" href="/">AbuSport</a>
+          <!-- <p class="navbar-text">Живая игра</p> -->
         </div>
 
         <!-- Account system -->
