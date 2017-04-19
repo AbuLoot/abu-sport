@@ -57,7 +57,7 @@
             <label for="phone" class="col-md-4 control-label">Номер Телефона</label>
 
             <div class="col-md-6">
-              <input id="phone" type="tel" class="form-control" name="phone" value="{{ old('phone') ? old('phone') : '7 ' }}" data-toggle="tooltip" data-placement="bottom" title="Пример: 7&nbsp;789&nbsp;0000000" minlength="11" maxlength="40" required>
+              <input id="phone" type="tel" class="form-control" name="phone" value="{{ old('phone') ? old('phone') : '7 ' }}" data-toggle="tooltip" data-placement="bottom" title="Пример: 7&nbsp;789&nbsp;0000" minlength="11" maxlength="40" required>
 
               @if ($errors->has('phone'))
                 <span class="help-block">
