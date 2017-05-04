@@ -59,7 +59,7 @@ class AreaController extends Controller
             $imageName = 'preview-image-'.str_random(10).'.'.$request->image->getClientOriginalExtension();
             $imagePath = 'img/organizations/'.$area->org_id.'/'.$imageName;
 
-            $this->resizeImage($request->image, 200, 150, $imagePath, 100);
+            $this->resizeImage($request->image, 345, 200, $imagePath, 100);
             $area->image = $imageName;
         }
 
