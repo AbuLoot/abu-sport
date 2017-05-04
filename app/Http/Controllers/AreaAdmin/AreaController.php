@@ -72,8 +72,8 @@ class AreaController extends Controller
 
             $images = unserialize($area->images);
 
-            if ( ! file_exists('img/organizations/'.$request->org_id)) {
-                mkdir('img/organizations/'.$request->org_id);
+            if ( ! file_exists('img/organizations/'.$area->org_id)) {
+                mkdir('img/organizations/'.$area->org_id);
             }
 
             foreach ($request->file('images') as $key => $image)
@@ -113,7 +113,7 @@ class AreaController extends Controller
 
         $area->sort_id = ($request->sort_id > 0) ? $request->sort_id : $area->count() + 1;
         $area->sport_id = $request->sport_id;
-        $area->org_id = $request->org_id;
+        // $area->org_id = $request->org_id;
         $area->city_id = $request->city_id;
         $area->district_id = $request->district_id;
         $area->slug = (empty($request->slug)) ? str_slug($request->title) : $request->slug;

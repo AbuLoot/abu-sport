@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
               <label for="org_id">Организация</label>
-              <input type="text" class="form-control" id="org_id" name="org_id" value="{{ $area->organization->title }}">
+              <input type="text" class="form-control" id="org_id" name="org_id" value="{{ $area->organization->title }}" disabled>
             </div>
             <div class="form-group">
               <label for="phones">Номера телефонов</label>
