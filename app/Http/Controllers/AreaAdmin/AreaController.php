@@ -48,8 +48,8 @@ class AreaController extends Controller
 
         if ($request->hasFile('image')) {
 
-            if ( ! file_exists('img/organizations/'.$request->org_id)) {
-                mkdir('img/organizations/'.$request->org_id);
+            if ( ! file_exists('img/organizations/'.$area->org_id)) {
+                mkdir('img/organizations/'.$area->org_id);
             }
 
             if (file_exists('img/organizations/'.$area->org_id)) {
@@ -57,7 +57,7 @@ class AreaController extends Controller
             }
 
             $imageName = 'preview-image-'.str_random(10).'.'.$request->image->getClientOriginalExtension();
-            $imagePath = 'img/organizations/'.$request->org_id.'/'.$imageName;
+            $imagePath = 'img/organizations/'.$area->org_id.'/'.$imageName;
 
             $this->resizeImage($request->image, 200, 150, $imagePath, 100);
             $area->image = $imageName;

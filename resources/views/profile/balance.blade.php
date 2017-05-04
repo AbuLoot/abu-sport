@@ -19,7 +19,7 @@
 
         <dl>
           <dt>Текущий баланс:</dt>
-          <dd>{{ $user->balance }} тг</dd>
+          <dd>{{ $user->balance }} 〒</dd>
         </dl>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-info">

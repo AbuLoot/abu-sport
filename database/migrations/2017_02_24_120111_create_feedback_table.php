@@ -18,8 +18,6 @@ class CreateFeedbackTable extends Migration
             $table->string('email');
             $table->timestamps();
         });
-
-
     }
 
     /**
