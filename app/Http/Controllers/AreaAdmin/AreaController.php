@@ -13,7 +13,6 @@ use App\City;
 use App\District;
 use App\Area;
 use App\Http\Requests;
-use App\Http\Requests\AreaRequest;
 use App\Http\Controllers\Controller;
 
 class AreaController extends Controller
@@ -42,8 +41,14 @@ class AreaController extends Controller
         return view('area-admin.areas.edit', compact('sports', 'organization', 'cities', 'districts', 'area'));
     }
 
-    public function update(AreaRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $area = Area::findOrFail($id);
 
         if ($request->hasFile('image')) {

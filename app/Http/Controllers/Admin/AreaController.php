@@ -13,7 +13,6 @@ use App\District;
 use App\Area;
 use App\Organization;
 use App\Http\Requests;
-use App\Http\Requests\AreaRequest;
 use App\Http\Controllers\Controller;
 
 class AreaController extends Controller
@@ -35,8 +34,14 @@ class AreaController extends Controller
         return view('admin.areas.create', compact('organizations', 'sports', 'cities', 'districts'));
     }
 
-    public function store(AreaRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $area = new Area;
 
         // Creating preview image
@@ -117,8 +122,14 @@ class AreaController extends Controller
         return view('admin.areas.edit', compact('sports', 'organizations', 'cities', 'districts', 'area'));
     }
 
-    public function update(AreaRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $area = Area::findOrFail($id);
 
         if ($request->hasFile('image')) {
@@ -163,8 +174,8 @@ class AreaController extends Controller
                     if (isset($images[$key])) {
 
                         Storage::delete([
-                            'img/organizations/'.$request->org_id.'/'.$images[$key]['image'],
-                            'img/organizations/'.$request->org_id.'/'.$images[$key]['mini_image']
+                            'img/organizations/'.$area->org_id.'/'.$images[$key]['image'],
+                            'img/organizations/'.$area->org_id.'/'.$images[$key]['mini_image']
                         ]);
 
                         $images[$key]['image'] = $imageName;
@@ -209,6 +220,16 @@ class AreaController extends Controller
 
         if (file_exists('img/organizations/'.$area->image)) {
             Storage::delete('img/organizations/'.$area->image);
+        }
+
+        $images = unserialize($area->images);
+
+        foreach ($images as $key => $image)
+        {
+            Storage::delete([
+                'img/organizations/'.$area->org_id.'/'.$images[$key]['image'],
+                'img/organizations/'.$area->org_id.'/'.$images[$key]['mini_image']
+            ]);
         }
 
         $area->delete();

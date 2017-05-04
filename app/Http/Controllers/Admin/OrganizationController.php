@@ -12,7 +12,6 @@ use App\District;
 use App\OrgType;
 use App\Organization;
 use App\Http\Requests;
-use App\Http\Requests\OrganizationRequest;
 use App\Http\Controllers\Controller;
 
 class OrganizationController extends Controller
@@ -34,8 +33,14 @@ class OrganizationController extends Controller
         return view('admin.organizations.create', compact('org_types', 'countries', 'cities', 'districts'));
     }
 
-    public function store(OrganizationRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $organization = new Organization;
 
         if ($request->hasFile('image')) {
@@ -77,8 +82,14 @@ class OrganizationController extends Controller
         return view('admin.organizations.edit', compact('org_types', 'countries', 'cities', 'districts', 'organization'));
     }
 
-    public function update(OrganizationRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $organization = Organization::findOrFail($id);
 
         if ($request->hasFile('image')) {

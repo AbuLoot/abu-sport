@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Page;
 use App\Http\Requests;
-use App\Http\Requests\PageRequest;
 use App\Http\Controllers\Controller;
 
 class PageController extends Controller
@@ -23,8 +22,14 @@ class PageController extends Controller
         return view('admin.pages.create');
     }
 
-    public function store(PageRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $page = new Page;
 
         $page->sort_id = ($request->sort_id > 0) ? $request->sort_id : $page->count() + 1;
@@ -47,8 +52,14 @@ class PageController extends Controller
         return view('admin.pages.edit', compact('page'));
     }
 
-    public function update(PageRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $page = Page::findOrFail($id);
         $page->sort_id = ($request->sort_id > 0) ? $request->sort_id : $page->count() + 1;
         $page->slug = (empty($request->slug)) ? str_slug($request->title) : $request->slug;

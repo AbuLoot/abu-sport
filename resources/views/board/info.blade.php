@@ -96,7 +96,7 @@
               <a href="#">
                 <img src="/img/organizations/{{ $area->org_id.'/'.$image['mini_image'] }}" class="img-responsive">
               </a>
-            </li> 
+            </li>
           @else
             <li data-target="#area-images" data-slide-to="{{ $i }}" class="col-xs-3 col-sm-2 col-md-2">
               <a href="#">

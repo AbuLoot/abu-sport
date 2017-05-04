@@ -8,7 +8,6 @@ use Storage;
 
 use App\Sport;
 use App\Http\Requests;
-use App\Http\Requests\SportRequest;
 use App\Http\Controllers\Controller;
 
 class SportController extends Controller
@@ -25,8 +24,14 @@ class SportController extends Controller
         return view('admin.sports.create');
     }
 
-    public function store(SportRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $sport = new Sport;
 
         if ($request->hasFile('image')) {
@@ -57,8 +62,14 @@ class SportController extends Controller
         return view('admin.sports.edit', compact('sport'));
     }
 
-    public function update(SportRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sort_id' => 'numeric',
+            'title' => 'required|min:2|max:80',
+            'slug' => 'min:2|max:80',
+        ]);
+
         $sport = Sport::findOrFail($id);
 
         if ($request->hasFile('image')) {
