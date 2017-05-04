@@ -49,8 +49,6 @@ class AreaController extends Controller
             'slug' => 'min:2|max:80',
         ]);
 
-        dd($request->all());
-
         $area = Area::findOrFail($id);
 
         if ($request->hasFile('image')) {
