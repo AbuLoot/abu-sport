@@ -49,6 +49,8 @@ class AreaController extends Controller
             'slug' => 'min:2|max:80',
         ]);
 
+        dd($request->all());
+
         $area = Area::findOrFail($id);
 
         if ($request->hasFile('image')) {
@@ -93,8 +95,8 @@ class AreaController extends Controller
                     if (isset($images[$key])) {
 
                         Storage::delete([
-                            'img/organizations/'.$request->org_id.'/'.$images[$key]['image'],
-                            'img/organizations/'.$request->org_id.'/'.$images[$key]['mini_image']
+                            'img/organizations/'.$area->org_id.'/'.$images[$key]['image'],
+                            'img/organizations/'.$area->org_id.'/'.$images[$key]['mini_image']
                         ]);
 
                         $images[$key]['image'] = $imageName;
@@ -113,7 +115,7 @@ class AreaController extends Controller
 
         $area->sort_id = ($request->sort_id > 0) ? $request->sort_id : $area->count() + 1;
         $area->sport_id = $request->sport_id;
-        // $area->org_id = $request->org_id;
+        $area->org_id = $request->org_id;
         $area->city_id = $request->city_id;
         $area->district_id = $request->district_id;
         $area->slug = (empty($request->slug)) ? str_slug($request->title) : $request->slug;
