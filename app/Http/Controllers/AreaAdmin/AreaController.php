@@ -83,11 +83,11 @@ class AreaController extends Controller
                     $imageName = 'image-'.$key.'-'.str_random(10).'.'.$image->getClientOriginalExtension();
 
                     // Creating images
-                    $imagePath = 'img/organizations/'.$request->org_id.'/'.$imageName;
+                    $imagePath = 'img/organizations/'.$area->org_id.'/'.$imageName;
                     $this->resizeImage($image, 800, 400, $imagePath, 100);
 
                     // Creating mini images
-                    $imagePath = 'img/organizations/'.$request->org_id.'/mini-'.$imageName;
+                    $imagePath = 'img/organizations/'.$area->org_id.'/mini-'.$imageName;
                     $this->resizeImage($image, 400, 200, $imagePath, 100);
 
                     if (isset($images[$key])) {
