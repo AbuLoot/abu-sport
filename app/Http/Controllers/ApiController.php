@@ -66,7 +66,7 @@ class ApiController extends Controller
 						$user->ip = \Request::ip();
 						$user->location = serialize(\Request::ips());
 						$user->status = 0;
-						$user->balance="0";
+						$user->balance= 10000;
 						$user->save();
 
 						$profile = new Profile;

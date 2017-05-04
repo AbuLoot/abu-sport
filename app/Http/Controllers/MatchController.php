@@ -113,6 +113,11 @@ class MatchController extends Controller
             return redirect()->back()->withInput()->withWarning('У вас недостаточно денег для создания матча');
         }
 
+        // Taking from balance
+        $request->user()->balance = $request->user()->balance - $price_for_each;
+        $request->user()->save();
+
+
         // Segment 4 = sport slug
         // Segment 5 = area id
         $segments = explode('/', $request->headers->get('referer'));
@@ -155,11 +160,11 @@ class MatchController extends Controller
         $match->match_type = $request->match_type;
         $match->number_of_players = $request->number_of_players;
         $match->price = $price;
-        $match->status = 0;
+        $match->status = 1;
         $match->save();
 
         // Notify Area Admin
-        event(new NotifyNewMatch($match));
+        // event(new NotifyNewMatch($match));
 
         // Notify All Users
         event(new CreatedNewMatch($match));
