@@ -123,6 +123,7 @@ class MatchAjaxController extends Controller
         {
             if ($item_match->start_time == $hours[0] OR $item_match->end_time == $hours[0] OR
                 $item_match->start_time == last($hours) OR $item_match->end_time == last($hours)) {
+
                 $messages['errors'][$index++] = 'Поле занято';
                 return response()->json($messages);
             }
