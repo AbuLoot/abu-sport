@@ -58,9 +58,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('chat/message/{match_id}', 'ChatController@postMessage');
     Route::post('chat/message-ajax/{match_id}', 'ChatController@postMessageAjax');
 
-    // Profile
+    // Balance and Payment
     Route::get('my-balance', 'ProfileController@balance');
     Route::post('top-up-balance', 'ProfileController@topUpBalance');
+    Route::get('payment', 'ProfileController@payment');
+    Route::get('postlink', 'ProfileController@postlink');
+
+    // Profile
     Route::get('my-profile', 'ProfileController@profile');
     Route::post('my-profile', 'ProfileController@updateProfile');
     Route::get('my-profile/edit', 'ProfileController@editProfile');

@@ -46,9 +46,9 @@
               <th class="empty-th text-center h3"><span class="glyphicon glyphicon-time"></span></th>
               @foreach($days as $day)
                 @if ($current_date == $day['year'])
-                  <th class="bg-info" @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['weekday'] }}<br>{{$day['day'] }}</th>
+                  <th class="bg-info" @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{$day['short_weekday'] }} <span class="h2">{{ $day['day'] }}</span></th>
                 @else
-                  <th @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{ $day['weekday'] }}<br>{{$day['day'] }}</th>
+                  <th @if (Request::is($current_uri.'/1')) colspan="2" @endif>{{$day['short_weekday'] }} <span class="h2">{{ $day['day'] }}</span></th>
                 @endif
               @endforeach
             </tr>
@@ -83,7 +83,7 @@
                     @endforeach
 
                     @if ($game == false)
-                      <td class="bg-warning">
+                      <td class="active">
                         <span class="text-muted">Время прошло</span>
                       </td>
                     @endif

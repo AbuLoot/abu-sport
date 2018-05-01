@@ -11,7 +11,6 @@ io.on('connection', function(socket) {
 			socket.send('Join to ' + channel);
 		});
 	});
-
 });
 
 redis.psubscribe('*', function(error, count) {
@@ -20,7 +19,7 @@ redis.psubscribe('*', function(error, count) {
 
 redis.on('pmessage', function (subscribed, channel, message) {
 
-	message = JSON.parse(message);	
+	message = JSON.parse(message);
     console.log(message);
 
 	if (message.event == "LeftMatch") {

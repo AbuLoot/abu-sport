@@ -135,7 +135,7 @@ class AreaController extends Controller
         if ($request->hasFile('image')) {
 
             if ( ! file_exists('img/organizations/'.$area->org_id)) {
-                mkdir('img/organizations/'.$area->org_id);
+                Storage::makeDirectory('img/organizations/'.$area->org_id);
             }
 
             if (file_exists('img/organizations/'.$area->org_id)) {

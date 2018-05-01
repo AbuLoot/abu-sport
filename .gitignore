@@ -3,7 +3,4 @@
 /node_modules
 /public/img/organizations
 /public/img/users
-Homestead.yaml
-Homestead.json
 .env
-

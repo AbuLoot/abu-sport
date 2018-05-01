@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Image;
+use Session;
 use Storage;
 
 use App\City;
+use App\Payment;
+use App\Operation;
 use App\Http\Requests;
 
 class ProfileController extends Controller
@@ -16,23 +19,92 @@ class ProfileController extends Controller
     public function balance()
     {
         $user = Auth::user();
+        $operations = Operation::all();
 
-        return view('profile.balance', compact('user'));
+        return view('profile.balance', compact('user', 'operations'));
     }
 
     public function topUpBalance(Request $request)
     {
         $this->validate($request, [
-            'balance' => 'required|numeric|min:3'
+            'balance' => 'required|numeric|min:1'
         ]);
+
+        $currency_id = "398"; // ID валюты. - 840-USD, 398-Tenge
+        $path = __DIR__.'/Epay/paysys/kkb.utils.php';
+        $path1 = __DIR__.'/Epay/abusport_paysys/config.txt';
+
+        \File::requireOnce($path);
+
+        $payment = new Payment;
+        $payment->amount = $request->balance;
+        $payment->operation_id = $request->operation_id;
+        $payment->user_id = Auth::id();
+        $payment->status = true;
+        $payment->save();
 
         $user = Auth::user();
 
-        $balance = $user->balance + $request->balance;
+        $balance = (int) $user->balance + $request->balance;
         $user->balance = $balance;
         $user->save();
 
-        return redirect('/my-balance')->with('status', 'Баланс пополнен!');
+        $content = process_request($payment->id, $currency_id, intval($request->balance), $path1);
+
+        return view('profile.pay', compact('payment', 'content'));
+    }
+
+    public function payment()
+    {
+        return view('profile.pay-success');
+        // return 'Платеж выполнен успешно! <a href="/">Вернуться на сайт.</a>';
+    }
+
+    public function postlink()
+    {
+        $path = __DIR__.'/Epay/paysys/kkb.utils.php';
+        $path1 = __DIR__.'/Epay/abusport_paysys/config.txt';
+
+        \File::requireOnce($path);
+
+        $result = 0;
+        if (isset($_POST["response"])) {
+            $response = $_POST["response"];
+        }
+
+        $result = process_response(stripslashes($response), $path1);
+
+        Storage::append('img/response.log', serialize($response));
+        Storage::append('img/result.log', serialize($result));
+
+        //foreach ($result as $key => $value) {echo $key." = ".$value."<br>";}
+        if (is_array($result)) {
+
+            if (in_array("ERROR", $result)) {
+
+                if ($result["ERROR_TYPE"] == "ERROR") {
+                    echo "System error:".$result["ERROR"];
+                }
+                elseif ($result["ERROR_TYPE"] == "system") {
+                    echo "Bank system error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+                }
+                elseif ($result["ERROR_TYPE"] == "auth") {
+                    echo "Bank system user autentication error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+                }
+            }
+            if (in_array("DOCUMENT", $result)) {
+
+                echo "Result DATA: <br>";
+                foreach ($result as $key => $value)
+                {
+                    echo "Postlink Result: ".$key." = ".$value."<br>";
+                }
+            }
+        }
+        else {
+            echo "System error".$result;
+        }
+        //return view('epay.paytest.postlink');
     }
 
     public function myMatches()
@@ -74,6 +146,7 @@ class ProfileController extends Controller
         ]);
 
         $user = Auth::user();
+        $id = Auth::id();
 
         $user->surname = $request->surname;
         $user->name = $request->name;

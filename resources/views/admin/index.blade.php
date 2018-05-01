@@ -4,6 +4,6 @@
 
     @include('partials.alerts')
 
-    <h1 class="text-center">AsSalyamu alaikum Admin!</h1>
+    <h1 class="text-center">AsSalamu alaikum Admin!</h1>
 
 @endsection

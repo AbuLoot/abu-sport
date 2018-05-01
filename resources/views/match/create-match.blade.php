@@ -90,9 +90,9 @@
                   <th class="empty-th text-center h3"><span class="glyphicon glyphicon-time"></span></th>
                   @foreach($days as $day)
                     @if ($current_date == $day['year'])
-                      <th class="text-center bg-info">{{ $day['day'] }}<br>{{$day['weekday'] }}</th>
+                      <th class="bg-info">{{ $day['day'] }}<br>{{$day['short_weekday'] }}</th>
                     @else
-                      <th class="text-center">{{ $day['day'] }}<br>{{$day['weekday'] }}</th>
+                      <th>{{ $day['day'] }}<br>{{$day['short_weekday'] }}</th>
                     @endif
                   @endforeach
                 </tr>
@@ -116,7 +116,7 @@
                         @endforeach
 
                         @if ($game == false)
-                          <td class="bg-warning">
+                          <td class="active">
                             <span class="text-muted">Время прошло</span>
                           </td>
                         @endif

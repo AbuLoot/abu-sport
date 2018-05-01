@@ -74,12 +74,12 @@
                 @endforeach
 
                 @if ($game == false)
-                  <!-- <tr>
+                  <tr class="active">
                     <td class="hours">{{ $hour }}</td>
                     <td><span>Время прошло</span></td>
                     <td></td>
                     <td></td>
-                  </tr> -->
+                  </tr>
                 @endif
               @else
                 <?php $game = false; ?>

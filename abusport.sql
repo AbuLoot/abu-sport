@@ -41,6 +41,8 @@ CREATE TABLE `areas` (
   `emails` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `start_time` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `end_time` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `latitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `longitude` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lang` char(4) COLLATE utf8_unicode_ci NOT NULL,
