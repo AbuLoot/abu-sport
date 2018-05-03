@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('my-balance', 'ProfileController@balance');
     Route::post('top-up-balance', 'ProfileController@topUpBalance');
     Route::get('payment', 'ProfileController@payment');
-    Route::get('postlink', 'ProfileController@postlink');
+    Route::post('postlink', 'ProfileController@postlink');
 
     // Profile
     Route::get('my-profile', 'ProfileController@profile');

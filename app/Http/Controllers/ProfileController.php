@@ -74,6 +74,9 @@ class ProfileController extends Controller
 
         $result = process_response(stripslashes($response), $path1);
 
+        Storage::append('img/response.log', serialize($response));
+        Storage::append('img/result.log', serialize($result));
+
         //foreach ($result as $key => $value) {echo $key." = ".$value."<br>";}
         if (is_array($result)) {
 
