@@ -3,7 +3,7 @@
 @section('tabs')
 
   <ul class="tabs-panel">
-    <li class="active"><a href="#">Мой баланс</a></li>
+    <li class="active"><a href="#">Подтверждение счета</a></li>
   </ul>
 
 @endsection
