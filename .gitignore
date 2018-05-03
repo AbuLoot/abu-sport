@@ -1,4 +1,5 @@
 /vendor
+/app/Http/Controllers/Epay
 /public/storage
 /node_modules
 /public/img/organizations

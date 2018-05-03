@@ -1,8 +1,0 @@
-MERCHANT_CERTIFICATE_ID = "c183e872";		Серийный номер сертификата Cert Serial Number
-MERCHANT_NAME = "ABUSPORT TOO";			Название магазина (продавца) Shop/merchant Name
-PRIVATE_KEY_FN = "/home/adminos/Sites/abu-sport/app/Http/Controllers/Epay/abusport_paysys/cert.prv";	Путь к закрытому ключу Private cert path
-PRIVATE_KEY_PASS = "WDfUveEf9i3";	Пароль к закрытому ключу Private cert password
-XML_TEMPLATE_FN = "/home/adminos/Sites/abu-sport/app/Http/Controllers/Epay/paysys/template.xml";		Путь к XML шаблону XML template path
-XML_COMMAND_TEMPLATE_FN = "/home/adminos/Sites/abu-sport/app/Http/Controllers/Epay/paysys/command_template.xml"; Путь к XML шаблону для команд (возврат/подтверждение) 
-PUBLIC_KEY_FN = "/home/adminos/Sites/abu-sport/app/Http/Controllers/Epay/abusport_paysys/kkbca.pem";	Путь к открытому ключу Public cert path
-MERCHANT_ID="98837431";				Терминал ИД в банковской Системе
