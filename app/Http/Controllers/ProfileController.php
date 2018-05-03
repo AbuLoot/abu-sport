@@ -9,6 +9,7 @@ use Image;
 use Session;
 use Storage;
 
+use App\User;
 use App\City;
 use App\Payment;
 use App\Operation;
@@ -81,15 +82,15 @@ class ProfileController extends Controller
 
             if (in_array("DOCUMENT", $result)) {
 
-                $user = Auth::user();
+                $payment_id = (int) round($result['ORDER_ORDER_ID']);
+                $payment = Payment::find($payment_id);
+                $payment->status = 2;
+                $payment->save();
+
+                $user = User::find($payment->user_id);
                 $balance = (int) $user->balance + $result['PAYMENT_AMOUNT'];
                 $user->balance = $balance;
                 $user->save();
-
-                $payment_id = (int) round($result['ORDER_ORDER_ID']);
-                $payment = Payment::find($payment_id);
-                $payment->status = true;
-                $payment->save();
 
                 return 0;
 
