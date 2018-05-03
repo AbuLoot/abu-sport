@@ -45,9 +45,9 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        $balance = (int) $user->balance + $request->balance;
-        $user->balance = $balance;
-        $user->save();
+        // $balance = (int) $user->balance + $request->balance;
+        // $user->balance = $balance;
+        // $user->save();
 
         $content = process_request($payment->id, $currency_id, intval($request->balance), $path1);
 
@@ -73,9 +73,6 @@ class ProfileController extends Controller
         }
 
         $result = process_response(stripslashes($response), $path1);
-
-        Storage::append('img/response.log', serialize($response));
-        Storage::append('img/result.log', serialize($result));
 
         //foreach ($result as $key => $value) {echo $key." = ".$value."<br>";}
         if (is_array($result)) {
