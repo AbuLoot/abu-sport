@@ -62,7 +62,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('my-balance', 'ProfileController@balance');
     Route::post('top-up-balance', 'ProfileController@topUpBalance');
     Route::get('payment', 'ProfileController@payment');
-    Route::post('postlink', 'ProfileController@postlink');
 
     // Profile
     Route::get('my-profile', 'ProfileController@profile');
@@ -80,6 +79,61 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('feedback', 'UserController@storeFeedback');
 });
 
+    Route::any('postlink', 'ProfileController@postlink');
+
+Route::get('post', function() {
+
+    $path = __DIR__.'/Controllers/Epay/paysys/kkb.utils.php';
+    $path1 = __DIR__.'/Controllers/Epay/abusport_paysys/config.txt';
+
+    \File::requireOnce($path);
+
+    $post = unserialize('a:1:{s:8:"response";s:872:"<document><bank name="Kazkommertsbank JSC"><customer name="ADILET ISSAYEV" mail="is.adilet@mail.ru" phone=""><merchant cert_id="c183e872" name="ABUSPORT TOO"><order order_id="000030" amount="10" currency="398"><department merchant_id="98837431" amount="10"/></order></merchant><merchant_sign type="RSA"/></customer><customer_sign type="RSA"/><results timestamp="2018-05-03 17:53:08"><payment merchant_id="98837431" card="400303-XX-XXXX-7573" amount="10.00" reference="812381947632" approval_code="886892" response_code="00" Secure="No" card_bin="KAZ" c_hash="F142AA394586ADDC4F309A1369B88731" exp_date="05/2022"/></results></bank><bank_sign cert_id="00c183d6c3" type="SHA/RSA">2IDTEGuZfIhmwpu9e5gO4gFg9etH6wT2cMsff4BUGW4+/LMT1CWrY8AQExp0RBSYGXg1FrEdF3n+v0lgUkqaHnad38KyUlzp1HL7Jy4YtFu/8YSgoKBVde69Mt6IOhBp0DHZSWSjWC05gKL/7eiKvuRCFI89vrVzn3O6wXTgFAw=</bank_sign></document>";}');
+
+    $result = process_response(stripslashes($post['response']), $path1);
+
+    if (is_array($result)) {
+
+        if (in_array("ERROR", $result)) {
+
+            if ($result["ERROR_TYPE"] == "ERROR") {
+                echo "System error:".$result["ERROR"];
+            }
+            elseif ($result["ERROR_TYPE"] == "system") {
+                echo "Bank system error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+            }
+            elseif ($result["ERROR_TYPE"] == "auth") {
+                echo "Bank system user autentication error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
+            }
+        }
+
+        if (in_array("DOCUMENT", $result)) {
+
+            $user = \Auth::user();
+            $balance = (int) $user->balance + $result['PAYMENT_AMOUNT'];
+            $user->balance = $balance;
+            $user->save();
+
+            // $payment_id = (int) round($result['ORDER_ORDER_ID']);
+            $payment_id = 16;
+            $payment = \App\Payment::find($payment_id);
+            $payment->status = true;
+            $payment->save();
+
+            return 0;
+
+            /*echo "Result DATA: <br>";
+            foreach ($result as $key => $value)
+            {
+                echo "Postlink Result: ".$key." = ".$value."<br>";
+            }*/
+        }
+    }
+    else {
+        echo "System error".$result;
+    }
+
+});
 
 // Administration
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:root', 'role:admin']], function () {

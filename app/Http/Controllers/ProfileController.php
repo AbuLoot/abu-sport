@@ -40,14 +40,8 @@ class ProfileController extends Controller
         $payment->amount = $request->balance;
         $payment->operation_id = $request->operation_id;
         $payment->user_id = Auth::id();
-        $payment->status = true;
+        $payment->status = false;
         $payment->save();
-
-        $user = Auth::user();
-
-        // $balance = (int) $user->balance + $request->balance;
-        // $user->balance = $balance;
-        // $user->save();
 
         $content = process_request($payment->id, $currency_id, intval($request->balance), $path1);
 
@@ -68,16 +62,8 @@ class ProfileController extends Controller
         \File::requireOnce($path);
 
         $result = 0;
-        if (isset($_POST["response"])) {
-            $response = $_POST["response"];
-        }
+        $result = process_response(stripslashes($_POST["response"]), $path1);
 
-        $result = process_response(stripslashes($response), $path1);
-
-        Storage::append('img/response.log', serialize($response));
-        Storage::append('img/result.log', serialize($result));
-
-        //foreach ($result as $key => $value) {echo $key." = ".$value."<br>";}
         if (is_array($result)) {
 
             if (in_array("ERROR", $result)) {
@@ -92,19 +78,31 @@ class ProfileController extends Controller
                     echo "Bank system user autentication error > Code: '".$result["ERROR_CODE"]."' Text: '".$result["ERROR_CHARDATA"]."' Time: '".$result["ERROR_TIME"]."' Order_ID: '".$result["RESPONSE_ORDER_ID"]."'";
                 }
             }
+
             if (in_array("DOCUMENT", $result)) {
 
-                echo "Result DATA: <br>";
+                $user = Auth::user();
+                $balance = (int) $user->balance + $result['PAYMENT_AMOUNT'];
+                $user->balance = $balance;
+                $user->save();
+
+                $payment_id = (int) round($result['ORDER_ORDER_ID']);
+                $payment = Payment::find($payment_id);
+                $payment->status = true;
+                $payment->save();
+
+                return 0;
+
+                /*echo "Result DATA: <br>";
                 foreach ($result as $key => $value)
                 {
                     echo "Postlink Result: ".$key." = ".$value."<br>";
-                }
+                }*/
             }
         }
         else {
             echo "System error".$result;
         }
-        //return view('epay.paytest.postlink');
     }
 
     public function myMatches()
