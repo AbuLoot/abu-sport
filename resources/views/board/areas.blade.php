@@ -31,7 +31,7 @@
             <p class="h4"><a href="{{ url('sport/'.$sport->slug.'/'.$area->id.'/matches') }}">{{ $area->title }}</a></p>
             <p><b>Адрес:</b> {{ $area->address }}</p>
             <p><b>Матчей:</b> <span class="badge">{{ $area->fieldsMatchesCount }}</span></p>
-            <p>{{ $area->description }}</p>
+            <p>{{ str_limit($area->description, 130) }}</p>
           </div>
         </div>
       @empty
